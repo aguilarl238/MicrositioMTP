@@ -170,6 +170,17 @@
             @Html.TextBoxFor(m => m.Email, new { @class = "input-mtp", type = "email", placeholder = "usuario@mtp.com.mx" })
             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger-mtp" })
         </div>
+        <!-- Campo: Cliente en la Base de Datos -->
+        <div class="field-group-mtp">
+            @Html.LabelFor(m => m.ClienteId, htmlAttributes: new { @class = "label-mtp" })
+            @Html.DropDownListFor(
+                m => m.ClienteId,
+                Model.ListadoClientes,
+                "--- Seleccione el Cliente ---",
+                htmlAttributes: new { @class = "input-mtp" }
+            )
+            @Html.ValidationMessageFor(m => m.ClienteId, "", new { @class = "text-danger-mtp" })
+        </div>
         <!-- Campo: Rol en la Base de Datos -->
         <div class="field-group-mtp">
             @Html.LabelFor(m => m.RolId, htmlAttributes: new { @class = "label-mtp" })

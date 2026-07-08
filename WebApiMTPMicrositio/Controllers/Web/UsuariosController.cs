@@ -36,7 +36,8 @@ namespace MTPMicrositio.Controllers.Web
         public async Task <ActionResult> Crear()
         {
             UsuarioViewModel viewModel = new UsuarioViewModel();
-            viewModel.ListadoRol = await CargarComboRolAsync();// Cargar combo de roles
+            viewModel.ListadoRol = await CargarComboRolAsync("Rol");// Cargar combo de roles
+            viewModel.ListadoClientes= await CargarComboRolAsync("Cli");// Cargar combo de Clientes
             return View(viewModel);
         }
 
@@ -150,7 +151,8 @@ namespace MTPMicrositio.Controllers.Web
                     Activo = usuario.Activo,
                     RolId = usuario.RolId,
                 };
-                model.ListadoRol = await CargarComboRolAsync(); // Cargar combo de roles
+                model.ListadoRol = await CargarComboRolAsync("Rol"); // Cargar combo de roles
+                model.ListadoClientes = await CargarComboRolAsync("Cli");// Cargar combo de Clientes
                 return View(model);
             }
         }
@@ -344,17 +346,42 @@ namespace MTPMicrositio.Controllers.Web
 
         private class RolDtoSimulado { public Guid RolId { get; set; } public string Nombre { get; set; } }
 
-        private async Task<IEnumerable<SelectListItem>> CargarComboRolAsync()
+        private async Task<IEnumerable<SelectListItem>> CargarComboRolAsync(string tipo)
         {
-            using (var request = new HttpRequestMessage(HttpMethod.Get, "api/Rol/Obtener"))
+            string uri=String.Empty;
+            switch (tipo)
+            {
+                case "Rol":
+                    uri = "api/Rol/Obtener";
+                    break;
+                case "Cli":
+                    uri = "api/Clientes";
+                break;        
+            }
+            using (var request = new HttpRequestMessage(HttpMethod.Get, uri))
             {
                 var response = await _httpClient.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
+
+
                     var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                    //Si es cliente, obtener la lista
+                    if (tipo=="Cli")
+                    {
+                        var listacli = JsonConvert.DeserializeObject<List<Cliente>>(json);
+                        //de la lista obtenida, tomar los dos campos id, nombre
+
+                        var j = from p in listacli select new { RolId = p.ClienteId, Nombre = p.Nombre };
+
+                        //pasar la list a json
+                        json = JsonConvert.SerializeObject(j);
+                    }
+
                     var listaEstatus = JsonConvert.DeserializeObject<List<RolDtoSimulado>>(json);
 
-                    var items = new List<SelectListItem> { new SelectListItem { Text = "-- Seleccione un Estatus --", Value = "" } };
+                    var items = new List<SelectListItem>();// { new SelectListItem { Text = "-- Seleccione un Estatus --", Value = "" } };
                     foreach (var est in listaEstatus)
                     {
                         items.Add(new SelectListItem { Text = est.Nombre, Value = est.RolId.ToString() });

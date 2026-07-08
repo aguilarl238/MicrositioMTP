@@ -35,5 +35,6 @@ namespace MTPMicrositio.Models.Web
 
         // Propiedad exclusiva de la Vista para pintar el Combo Box DropDown
         public IEnumerable<SelectListItem> ListadoRol { get; set; }
+        public IEnumerable<SelectListItem> ListadoClientes { get; set; }
     }
 }
