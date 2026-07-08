@@ -158,87 +158,81 @@
     {
         @Html.AntiForgeryToken()
 
-<div class="form-card-mtp">
+        <div class="form-card-mtp">
 
-    @if (!ViewData.ModelState.IsValid)
-    {
-        <div style="background-color: #FCE8E6; color: #D9534F; padding: 12px; border-radius: 6px; margin-bottom: 20px; font-size: 13px;">
-            @Html.ValidationSummary(true, "", new { @style = "list-style:none; padding:0; margin:0;" })
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div style="background-color: #FCE8E6; color: #D9534F; padding: 12px; border-radius: 6px; margin-bottom: 20px; font-size: 13px;">
+                    @Html.ValidationSummary(true, "", new { @style = "list-style:none; padding:0; margin:0;" })
+                </div>
+            }
+
+            <!-- Llaves y campos de control ocultos para mantener integridad estructural -->
+            @Html.HiddenFor(model => model.ClienteId)
+
+            <!-- Campo: Nombre Comercial -->
+            <div class="field-group-mtp">
+                @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "label-mtp" })
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "input-mtp", placeholder = "Nombre corporativo" } })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger-mtp" })
+            </div>
+
+            <!-- Campo: Estatus en la Base de Datos -->
+            <div class="field-group-mtp">
+                @Html.LabelFor(model => model.EstatusId, htmlAttributes: new { @class = "label-mtp" })
+                @Html.DropDownListFor(
+                    model => model.EstatusId,
+                    Model.ListadoEstatus,
+                    "--- Seleccione el estatus actual ---",
+                    htmlAttributes: new { @class = "input-mtp" }
+                )
+                @Html.ValidationMessageFor(model => model.EstatusId, "", new { @class = "text-danger-mtp" })
+            </div>
+
+            <!-- Campo: URL del Logotipo Institucional -->
+            <div class="field-group-mtp">
+                @Html.LabelFor(model => model.LogoUrl, htmlAttributes: new { @class = "label-mtp" })
+                @Html.EditorFor(model => model.LogoUrl, new { htmlAttributes = new { @class = "input-mtp", placeholder = "https://ejemplo.com/assets/logo.png" } })
+                @Html.ValidationMessageFor(model => model.LogoUrl, "", new { @class = "text-danger-mtp" })
+            </div>
+
+            <!-- Sección de Cumplimiento y Gobernanza Corporativa -->
+            <div class="field-group-mtp" style="background: var(--blanco-frio); padding: 14px; border-radius: 6px; border: 1px solid var(--borde-suave); margin-top: 24px;">
+                <span style="font-size: 11px; color: var(--texto-secundario); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; display: block; margin-bottom: 10px;">
+                    Validación Jurídica y Control Operativo
+                </span>
+
+                <!-- Checkbox: Autorización Legal de Marca -->
+                <div class="checkbox-container-mtp mb-2">
+                    @Html.CheckBoxFor(model => model.LogoAutorizado, new { id = "LogoAutorizado" })
+                    <label for="LogoAutorizado" class="checkbox-label-mtp" style="font-weight: 600;">
+                        Confirmar uso legal y autorización firmada de marca corporativa [RF-15]
+                    </label>
+                </div>
+                @Html.ValidationMessageFor(model => model.LogoAutorizado, "", new { @class = "text-danger-mtp", style = "margin-left: 26px; margin-bottom: 10px;" })
+
+                <!-- Checkbox: Estado Activo en Plataforma -->
+                <div class="checkbox-container-mtp">
+                    @Html.CheckBoxFor(model => model.Activo, new { id = "Activo" })
+                    <label for="Activo" class="checkbox-label-mtp">
+                        Cuenta habilitada en el entorno comercial operativo
+                    </label>
+                </div>
+                @Html.ValidationMessageFor(model => model.Activo, "", new { @class = "text-danger-mtp", style = "margin-left: 26px;" })
+            </div>
+
+            <!-- Botonera de Envío Integrada -->
+            <div class="d-flex align-items-center" style="gap: 12px; margin-top: 28px;">
+                <button type="submit" class="btn-mtp-submit">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                    Aplicar Cambios
+                </button>
+                <a href="@Url.Action("Index")" class="btn-mtp-cancel">
+                    Cancelar y Volver
+                </a>
+            </div>
+
         </div>
-    }
-
-    <!-- Llaves y campos de control ocultos para mantener integridad estructural -->
-    @Html.HiddenFor(model => model.ClienteId)
-
-    <!-- Campo: Nombre Comercial -->
-    <div class="field-group-mtp">
-        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "label-mtp" })
-        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "input-mtp", placeholder = "Nombre corporativo" } })
-        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger-mtp" })
-    </div>
-
-    <!-- Campo: Estatus en la Base de Datos -->
-    <div class="field-group-mtp">
-        @Html.LabelFor(model => model.EstatusId, htmlAttributes: new { @class = "label-mtp" })
-        @Html.DropDownListFor(
-            model => model.EstatusId,
-            Model.ListadoEstatus,
-            "--- Seleccione el estatus actual ---",
-            htmlAttributes: new { @class = "input-mtp" }
-        )
-        @Html.ValidationMessageFor(model => model.EstatusId, "", new { @class = "text-danger-mtp" })
-    </div>
-
-    <!-- Campo: URL del Logotipo Institucional -->
-    <div class="field-group-mtp">
-        @Html.LabelFor(model => model.LogoUrl, htmlAttributes: new { @class = "label-mtp" })
-        @Html.EditorFor(model => model.LogoUrl, new { htmlAttributes = new { @class = "input-mtp", placeholder = "https://ejemplo.com/assets/logo.png" } })
-        @Html.ValidationMessageFor(model => model.LogoUrl, "", new { @class = "text-danger-mtp" })
-    </div>
-
-    <!-- Sección de Cumplimiento y Gobernanza Corporativa -->
-    <div class="field-group-mtp" style="background: var(--blanco-frio); padding: 14px; border-radius: 6px; border: 1px solid var(--borde-suave); margin-top: 24px;">
-        <span style="font-size: 11px; color: var(--texto-secundario); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; display: block; margin-bottom: 10px;">
-            Validación Jurídica y Control Operativo
-        </span>
-
-        <!-- Checkbox: Autorización Legal de Marca -->
-        <div class="checkbox-container-mtp mb-2">
-            @Html.CheckBoxFor(model => model.LogoAutorizado, new { id = "LogoAutorizado" })
-            <label for="LogoAutorizado" class="checkbox-label-mtp" style="font-weight: 600;">
-                Confirmar uso legal y autorización firmada de marca corporativa [RF-15]
-            </label>
-        </div>
-        @Html.ValidationMessageFor(model => model.LogoAutorizado, "", new { @class = "text-danger-mtp", style = "margin-left: 26px; margin-bottom: 10px;" })
-
-        <!-- Checkbox: Estado Activo en Plataforma -->
-        <div class="checkbox-container-mtp">
-            @Html.CheckBoxFor(model => model.Activo, new { id = "Activo" })
-            <label for="Activo" class="checkbox-label-mtp">
-                Cuenta habilitada en el entorno comercial operativo
-            </label>
-        </div>
-        @Html.ValidationMessageFor(model => model.Activo, "", new { @class = "text-danger-mtp", style = "margin-left: 26px;" })
-    </div>
-
-    <!-- Dentro del Form de Insertar o Editar Cliente -->
-    <div class="col-12 field-group-mtp">
-        @Html.Partial("_ModalAsignarUsuarios", Model.UsuariosSeleccionadosIds)
-    </div>
-
-
-    <!-- Botonera de Envío Integrada -->
-    <div class="d-flex align-items-center" style="gap: 12px; margin-top: 28px;">
-        <button type="submit" class="btn-mtp-submit">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-            Aplicar Cambios
-        </button>
-        <a href="@Url.Action("Index")" class="btn-mtp-cancel">
-            Cancelar y Volver
-        </a>
-    </div>
-
-</div>
     }
 </div>
 

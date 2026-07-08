@@ -170,17 +170,7 @@
             @Html.TextBoxFor(m => m.Email, new { @class = "input-mtp", type = "email", placeholder = "usuario@mtp.com.mx" })
             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger-mtp" })
         </div>
-        <!-- Campo: Rol en la Base de Datos -->
-        <div class="field-group-mtp">
-            @Html.LabelFor(m => m.RolId, htmlAttributes: new { @class = "label-mtp" })
-            @Html.DropDownListFor(
-                m => m.RolId,
-                Model.ListadoRol,
-                "--- Seleccione el Rol ---",
-                htmlAttributes: new { @class = "input-mtp" }
-            )
-            @Html.ValidationMessageFor(m => m.RolId, "", new { @class = "text-danger-mtp" })
-        </div>
+
         <!-- Separador visual discreto para sección de seguridad -->
         <hr style="border-top: 1px solid var(--borde-suave); margin: 24px 0;" />
 

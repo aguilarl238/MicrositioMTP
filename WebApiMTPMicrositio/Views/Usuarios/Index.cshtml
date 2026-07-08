@@ -278,7 +278,7 @@
                     <tr>
                         <th style="width: 25%;">Nombre Completo</th>
                         <th style="width: 25%;">Correo Electrónico</th>
-                        <th style="width: 15%;">Rol</th>
+                        <th style="width: 15%;">Código Cliente</th>
                         <th style="width: 12%; text-align: center;">Estatus</th>
                         <th style="width: 13%;">Alta en Sistema</th>
                         <th style="width: 10%; text-align: right;">Acciones</th>
@@ -294,7 +294,7 @@
                                 <td style="color: var(--texto-secundario);">@usuario.Email</td>
                                 <td>
                                     <code style="color: var(--azul-noche); background: #EAEFF5; padding: 2px 6px; border-radius: 4px; font-size: 11px;">
-                                        @(usuario.RolNombre)
+                                        @(usuario.ClienteId.HasValue ? usuario.ClienteId.Value.ToString().Substring(0,8) + "..." : "S/A")
                                     </code>
                                 </td>
                                 <td class="text-center">
