@@ -11,113 +11,336 @@
     </div>
 </section>
 
-<!-- CUERPO PRINCIPAL: METODOLOGÍA / TIMELINE -->
-<main class="workflow-section">
+<!-- SECCIÓN METODOLOGÍA CIRCULAR -->
+<section class="circular-workflow-section">
     <div class="max-container">
         <div class="section-label">Nuestro Flujo</div>
         <div class="section-title">Las 4 fases estratégicas de nuestro <em>Digital Business Assurance</em></div>
         <p class="section-sub">Desde el entendimiento inicial hasta la automatización continua, garantizamos visibilidad total del estado de calidad de tu software.</p>
 
-        <div class="timeline">
+        <!-- Contenedor de la Rueda -->
+        <div class="wheel-wrapper">
+            <div class="wheel-container">
 
-            <!-- Fase 1: Diagnóstico -->
-            <div class="timeline-item">
-                <div class="timeline-dot">01</div>
-                <div class="phase-card">
-                    <div class="phase-left">
+                <!-- Centro de la Rueda -->
+                <div class="wheel-center">
+                    <div class="center-content">
+                        <strong>QA</strong>
+                        <span>Continuo</span>
+                    </div>
+                </div>
+
+                <!-- Fase 1: Diagnóstico -->
+                <div class="wheel-item phase-1">
+                    <div class="wheel-dot">01</div>
+                    <div class="wheel-card">
                         <span class="phase-badge">Fase Inicial</span>
                         <h3>Diagnóstico e Ingesta Técnica</h3>
-                    </div>
-                    <div class="phase-right">
-                        <p>Analizamos la madurez de tus entornos y procesos de desarrollo actuales. Evaluamos la arquitectura técnica de tu software e identificamos cuellos de botella mediante <span class="highlight">marcos predictivos</span>, permitiendo estructurar un plan de QA a la medida de tus necesidades de negocio.</p>
-                        <div class="phase-deliverables">
-                            <div class="deliverable-tag"><span>•</span> Matriz de Riesgos Inicial</div>
-                            <div class="deliverable-tag"><span>•</span> Plan Maestro de Pruebas (MTP)</div>
-                            <div class="deliverable-tag"><span>•</span> Definición de Alcance y KPIs</div>
+                        <p>Analizamos la madurez de tus entornos y procesos mediante <span class="highlight">marcos predictivos</span> para estructurar un plan a la medida.</p>
+                        <div class="wheel-deliverables">
+                            <span>• Matriz de Riesgos Inicial</span>
+                            <span>• Plan Maestro (MTP)</span>
+                            <span>• Alcance y KPIs</span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Fase 2: Estrategia y Diseño -->
-            <div class="timeline-item">
-                <div class="timeline-dot">02</div>
-                <div class="phase-card">
-                    <div class="phase-left">
+                <!-- Fase 2: Estrategia y Diseño -->
+                <div class="wheel-item phase-2">
+                    <div class="wheel-dot">02</div>
+                    <div class="wheel-card">
                         <span class="phase-badge">Planificación</span>
                         <h3>Modelado y Diseño de Escenarios</h3>
-                    </div>
-                    <div class="phase-right">
-                        <p>Traducimos tus requerimientos lógicos y funcionales en casos de prueba avanzados utilizando nuestro framework patentado <span class="highlight">OMNIATEST</span>[cite: 3]. Diseñamos estrategias de cobertura total que priorizan los flujos transaccionales críticos y de alto impacto financiero para tu negocio.</p>
-                        <div class="phase-deliverables">
-                            <div class="deliverable-tag"><span>•</span> Matrices de Trazabilidad</div>
-                            <div class="deliverable-tag"><span>•</span> Scripts de Automatización Base</div>
-                            <div class="deliverable-tag"><span>•</span> Set de Datos de Prueba Seguros</div>
+                        <p>Traducimos requerimientos en casos avanzados con nuestro framework <span class="highlight">OMNIATEST</span>, priorizando flujos críticos.</p>
+                        <div class="wheel-deliverables">
+                            <span>• Matrices de Trazabilidad</span>
+                            <span>• Scripts Base</span>
+                            <span>• Datos Seguros</span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Fase 3: Ejecución y Automatización -->
-            <div class="timeline-item">
-                <div class="timeline-dot">03</div>
-                <div class="phase-card">
-                    <div class="phase-left">
+                <!-- Fase 3: Ejecución y Automatización -->
+                <div class="wheel-item phase-3">
+                    <div class="wheel-dot">03</div>
+                    <div class="wheel-card">
                         <span class="phase-badge">Ciclo Activo</span>
                         <h3>Ejecución Continua y DevSecOps</h3>
-                    </div>
-                    <div class="phase-right">
-                        <p>Nuestras células integran ejecuciones automatizadas y manuales directamente en tus *sprints* de desarrollo. Ejecutamos pruebas funcionales, <span class="highlight">análisis de rendimiento, estrés masivo y penetración de seguridad</span>, inyectando retroalimentación inmediata a tus programadores.</p>
-                        <div class="phase-deliverables">
-                            <div class="deliverable-tag"><span>•</span> Pipelines CI/CD Integrados</div>
-                            <div class="deliverable-tag"><span>•</span> Reportes de Defectos en Tiempo Real</div>
-                            <div class="deliverable-tag"><span>•</span> Dashboards de Calidad Digital</div>
+                        <p>Automatización en *sprints*. Pruebas funcionales, <span class="highlight">rendimiento, estrés y penetración</span> con feedback inmediato.</p>
+                        <div class="wheel-deliverables">
+                            <span>• Pipelines CI/CD</span>
+                            <span>• Reportes Real-Time</span>
+                            <span>• Dashboards Calidad</span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Fase 4: Cierre y Optimización -->
-            <div class="timeline-item">
-                <div class="timeline-dot">04</div>
-                <div class="phase-card">
-                    <div class="phase-left">
+                <!-- Fase 4: Cierre y Optimización -->
+                <div class="wheel-item phase-4">
+                    <div class="wheel-dot">04</div>
+                    <div class="wheel-card">
                         <span class="phase-badge">Evolución</span>
-                        <h3>Estabilización y Cierre de Producción</h3>
-                    </div>
-                    <div class="phase-right">
-                        <p>Emitimos el dictamen técnico de calidad que avala el despliegue a producción de forma segura. Mediante nuestro Gobierno calificado bajo <span class="highlight">TMMi Nivel 5</span>, optimizamos los scripts de prueba para futuros ciclos, garantizando un software robusto y <span class="highlight">cero defectos críticos</span> en el entorno real[cite: 3].</p>
-                        <div class="phase-deliverables">
-                            <div class="deliverable-tag"><span>•</span> Certificado de Liberación Segura</div>
-                            <div class="deliverable-tag"><span>•</span> Repositorio de Pruebas Evolutivas</div>
-                            <div class="deliverable-tag"><span>•</span> Análisis de Retorno de Inversión (ROI)</div>
+                        <h3>Estabilización y Cierre</h3>
+                        <p>Dictamen calificado bajo <span class="highlight">TMMi Nivel 5</span>, garantizando software robusto y <span class="highlight">cero defectos críticos</span>.</p>
+                        <div class="wheel-deliverables">
+                            <span>• Liberación Segura</span>
+                            <span>• Pruebas Evolutivas</span>
+                            <span>• Análisis de ROI</span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-
-        <!-- COMPROMISO DE RESPUESTA OPERATIVA -->
-        <div class="sla-commitment">
-            <div class="sla-text">
-                <h4>Compromiso de Integración Inmediata</h4>
-                <p>Nuestra madurez operativa nos permite desplegar y acoplar células especialistas de QA e ingenieros certificados junto a tus equipos internos en un periodo de tiempo ágil, sin generar burocracia ni demoras en tus proyectos[cite: 3].</p>
-            </div>
-            <div class="sla-metric">
-                <div class="sla-metric-val">&lt; 1 Sem</div>
-                <div class="sla-metric-lbl">Tiempo de Despliegue de Células[cite: 3]</div>
             </div>
         </div>
-
     </div>
-</main>
+</section>
+
+<!-- COMPROMISO DE RESPUESTA OPERATIVA -->
+<div class="sla-commitment">
+    <div class="sla-text">
+        <h4>Compromiso de Integración Inmediata</h4>
+        <p>Nuestra madurez operativa nos permite desplegar y acoplar células especialistas de QA e ingenieros certificados junto a tus equipos internos en un periodo de tiempo ágil, sin generar burocracia ni demoras en tus proyectos.</p>
+    </div>
+    <div class="sla-metric">
+        <div class="sla-metric-val">&lt; 1 Sem</div>
+        <div class="sla-metric-lbl">Tiempo de Despliegue de Células</div>
+    </div>
+</div>
 
 <!-- CTA BANNER -->
 <div class="cta-banner">
     <div class="cta-banner-left">
         <h2>¿Quieres ver cómo optimizamos tu <em>ciclo de desarrollo</em>?</h2>
-        <p>Agenda una sesión técnica con nuestros arquitectos y conoce nuestro framework OMNIATEST en acción[cite: 3].</p>
+        <p>Agenda una sesión técnica con nuestros arquitectos y conoce nuestro framework OMNIATEST en acción.</p>
     </div>
-    <div class="cta-banner-btn">Solicitar Sesión Metodológica</div>
+    <div class="hero-btns">
+        <a class="btn-primary" href="@Url.Action("Contacto", "Home")">Solicitar Sesión Metodológica</a>
+    </div>
 </div>
+
+<style>
+/* Como trabajamos */
+:root {
+    --primary-color: #0066ff;
+    --secondary-color: #00f2fe;
+    --text-main: #333333;
+    --text-muted: #666666;
+    --bg-card: #ffffff;
+    --bg-section: #f8fafc;
+}
+
+/* Estructura Base */
+.circular-workflow-section {
+    background-color: var(--bg-section);
+    padding: 80px 20px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    overflow: hidden;
+}
+
+.max-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-label {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    color: var(--text-main);
+    margin-bottom: 15px;
+}
+
+.section-sub {
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 60px auto;
+    font-size: 1.1rem;
+}
+
+.highlight {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.phase-badge {
+    display: inline-block;
+    background: rgba(0, 102, 255, 0.1);
+    color: var(--primary-color);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Rueda e Ítems (Desktop) */
+.wheel-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.wheel-container {
+    position: relative;
+    width: 750px;
+    height: 750px;
+    border: 2px dashed rgba(0, 102, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Núcleo Central */
+.wheel-center {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+    z-index: 10;
+}
+
+.center-content strong {
+    display: block;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+}
+
+.center-content span {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+/* Posicionamiento Circular de Tarjetas */
+.wheel-item {
+    position: absolute;
+    width: 320px;
+    transition: transform 0.3s ease;
+}
+
+/* Distribución matemática en los 4 cuadrantes del círculo */
+.phase-1 {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -40px);
+}
+
+.phase-2 {
+    top: 50%;
+    right: 0;
+    transform: translate(160px, -50%);
+}
+
+.phase-3 {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 40px);
+}
+
+.phase-4 {
+    top: 50%;
+    left: 0;
+    transform: translate(-160px, -50%);
+}
+
+/* Tarjetas de Contenido */
+.wheel-card {
+    background: var(--bg-card);
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    text-align: left;
+    border: 1px solid rgba(0,0,0,0.03);
+    position: relative;
+}
+
+.wheel-item:hover .wheel-card {
+    box-shadow: 0 15px 35px rgba(0, 102, 255, 0.15);
+    border-color: rgba(0, 102, 255, 0.2);
+}
+
+.wheel-card h3 {
+    font-size: 1.15rem;
+    margin: 5px 0 10px 0;
+    color: var(--text-main);
+}
+
+.wheel-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+
+/* Burbujas Numéricas */
+.wheel-dot {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    z-index: 5;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+/* Ubicación del número respecto a cada tarjeta */
+.phase-1 .wheel-dot {
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.phase-2 .wheel-dot {
+    left: -18px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.phase-3 .wheel-dot {
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.phase-4 .wheel-dot {
+    right: -18px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Entregables en formato micro-tags */
+.wheel-deliverables {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 10px;
+}
+
+    .wheel-deliverables span {
+        font-size: 0.8rem;
+        color: var(--text-main);
+        font-weight: 500;
+    }
+
+</style>
