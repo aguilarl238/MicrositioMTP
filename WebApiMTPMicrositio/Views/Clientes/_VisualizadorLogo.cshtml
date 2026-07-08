@@ -1,0 +1,13 @@
+﻿
+@model MTPMicrositio.Models.Web.ClientesViewModel
+
+<div style="display: flex; align-items: center; gap: 10px;">
+    @if (!string.IsNullOrEmpty(Model.LogoUrl) && Model.LogoAutorizado)
+    {
+        <img src="@Model.LogoUrl" alt="MTP - @Model.Nombre" style="max-height: 40px; max-width: 120px; object-fit: contain;" />
+    }
+    else
+    {
+        <span class="badge badge-secondary" style="font-size: 1.1em; padding: 6px 12px;">@Model.Nombre</span>
+    }
+</div>

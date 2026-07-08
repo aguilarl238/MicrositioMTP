@@ -1,0 +1,293 @@
+﻿@model MTPMicrositio.Models.Web.ProyectoFiltroViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+    ViewBag.Title = "Portafolio de Proyectos";
+}
+<link rel="stylesheet" href="/Content/Style.css">
+<link rel="stylesheet" href="/Content/custom.css">
+<style>
+    :root {
+        --azul-noche: #1B2E4B;
+        --verde-esmeralda: #1B7A61;
+        --blanco-frio: #F8F9FB;
+        --borde-suave: #DDE3EA;
+        --texto-secundario: #5A6E85;
+    }
+
+    .page-header-mtp {
+        margin-bottom: 24px;
+        border-bottom: 1px solid var(--borde-suave);
+        padding-bottom: 16px;
+    }
+
+    .page-title-mtp {
+        color: var(--azul-noche);
+        font-weight: 500;
+        font-size: 24px;
+        margin: 0;
+    }
+
+    .page-subtitle-mtp {
+        color: var(--texto-secundario);
+        font-size: 13px;
+        margin: 4px 0 0 0;
+    }
+
+    /* Botonera de Control Operativo */
+    .btn-mtp-primary {
+        background-color: var(--verde-esmeralda);
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.2s ease;
+    }
+
+        .btn-mtp-primary:hover {
+            background-color: #145b48;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+    .btn-mtp-secondary {
+        background-color: var(--azul-noche);
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+    }
+
+        .btn-mtp-secondary:hover {
+            background-color: #111d30;
+            color: #ffffff;
+        }
+
+    .btn-mtp-cancel {
+        background-color: transparent;
+        color: var(--texto-secundario);
+        border: 1px solid var(--borde-suave);
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+        .btn-mtp-cancel:hover {
+            background-color: var(--blanco-frio);
+            color: var(--azul-noche);
+            border-color: var(--azul-noche);
+            text-decoration: none;
+        }
+
+    /* Enlaces inline para acciones de fila */
+    .btn-mtp-action {
+        color: var(--texto-secundario);
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+        .btn-mtp-action:hover {
+            color: var(--azul-noche);
+            text-decoration: underline;
+        }
+
+    /* Caja Ejecutiva de Consultas */
+    .filter-card-mtp {
+        background: var(--blanco-frio);
+        border: 1px solid var(--borde-suave);
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    .label-mtp {
+        color: var(--azul-noche);
+        font-weight: 600;
+        font-size: 12px;
+        margin-bottom: 6px;
+        display: block;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+
+    .select-mtp {
+        width: 100%;
+        background-color: #ffffff;
+        border: 1px solid var(--borde-suave);
+        border-radius: 6px;
+        padding: 10px 14px;
+        font-size: 13px;
+        color: var(--azul-noche);
+        -webkit-appearance: none;
+        transition: all 0.2s ease;
+    }
+
+        .select-mtp:focus {
+            outline: none;
+            border-color: var(--verde-esmeralda);
+            box-shadow: 0 0 0 3px rgba(27, 122, 97, 0.08);
+        }
+
+    /* Tabla Estructurada MTP */
+    .card-table-container {
+        background: #ffffff;
+        border-radius: 8px;
+        border: 1px solid var(--borde-suave);
+        box-shadow: 0 2px 12px rgba(27, 46, 75, 0.03) !important;
+    }
+
+    .table-mtp th {
+        background-color: var(--azul-noche);
+        color: #ffffff;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 12px 16px !important;
+        border: none !important;
+    }
+
+    .table-mtp td {
+        padding: 14px 16px !important;
+        border-bottom: 1px solid var(--borde-suave) !important;
+        color: var(--azul-noche);
+        font-size: 13px;
+    }
+
+    .table-mtp tr:last-child td {
+        border-bottom: none !important;
+    }
+
+    /* Badges Técnicos e Indicadores de Estatus */
+    .badge-mtp-type {
+        background-color: var(--blanco-frio);
+        color: var(--azul-noche);
+        border: 1px solid var(--borde-suave);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 500;
+    }
+
+    .badge-mtp-active {
+        background-color: #E8F7F3;
+        color: var(--verde-esmeralda);
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 11px;
+    }
+
+    .badge-mtp-inactive {
+        background-color: #FCE8E6;
+        color: #D9534F;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 11px;
+    }
+</style>
+
+<div class="container p-0" style="max-width: 1140px; margin-top: 1.5rem; margin-bottom: 3rem;">
+
+    <!-- Encabezado del Módulo -->
+    <div class="page-header-mtp d-flex justify-content-between align-items-center flex-wrap">
+        <div>
+            <h2 class="page-title-mtp">Control de Células y Proyectos</h2>
+            <p class="page-subtitle-mtp">Consola integrada de aseguramiento, portafolio técnico y estatus contractual.</p>
+        </div>
+        <div class="mt-2 mt-sm-0">
+            <a href="@Url.Action("Insertar")" class="btn-mtp-primary">
+                <i class="bi bi-plus-lg me-1"></i> Nuevo Proyecto
+            </a>
+        </div>
+    </div>
+
+    <!-- Panel de Búsqueda y Filtrado Dinámico -->
+    @using (Html.BeginForm("Index", "Proyecto", FormMethod.Get, new { @class = "filter-card-mtp mb-4 shadow-sm" }))
+    {
+        <div class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label class="label-mtp">Filtrar por Cliente</label>
+                @Html.DropDownListFor(m => m.FiltrarClienteId, Model.ListaClientes, "--- Todos los Clientes ---", new { @class = "select-mtp form-select" })
+            </div>
+            <div class="col-md-4">
+                <label class="label-mtp">Filtrar por Consultor / Usuario</label>
+                @Html.DropDownListFor(m => m.FiltrarUsuarioId, Model.ListaUsuarios, "--- Todos los Usuarios ---", new { @class = "select-mtp form-select" })
+            </div>
+            <div class="col-md-4 d-flex" style="gap: 12px;">
+                <button type="submit" class="btn-mtp-secondary w-100">
+                    <i class="bi bi-filter me-1"></i> Aplicar Filtros
+                </button>
+                <a href="@Url.Action("Index")" class="btn-mtp-cancel w-100 text-center">Limpiar</a>
+            </div>
+        </div>
+    }
+
+    <!-- Tabla de Resultados Corporativos -->
+    <div class="card card-table-container p-0 border-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 table-mtp">
+                <thead>
+                    <tr>
+                        <th style="width: 40%;">Nombre del Proyecto</th>
+                        <th style="width: 20%;">Tipo</th>
+                        <th style="width: 15%;">Fecha Inicio</th>
+                        <th style="width: 15%; text-align: center;">Estatus</th>
+                        <th style="width: 10%; text-align: right;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Proyectos != null && Model.Proyectos.Any())
+                    {
+                        foreach (var p in Model.Proyectos)
+                        {
+                            <tr>
+                                <td>
+                                    <span style="font-weight: 500; display: block;">@p.Nombre</span>
+                                    <small class="text-muted" style="font-size: 11px;">
+                                        ID: <code style="color: var(--azul-noche); background: #EAEFF5; padding: 1px 4px; border-radius: 3px;">@p.ProyectoId.ToString().Substring(0, 8)...</code>
+                                    </small>
+                                </td>
+                                <td>
+                                    <span class="badge-mtp-type">@p.Tipo</span>
+                                </td>
+                                <td style="color: var(--texto-secundario); font-size: 12px;">
+                                    @(p.FechaInicio.HasValue ? p.FechaInicio.Value.ToString("dd/MM/yyyy") : "—")
+                                </td>
+                                <td class="text-center">
+                                    <span class="@(p.Activo ? "badge-mtp-active" : "badge-mtp-inactive")">
+                                        @(p.Activo ? "Activo" : "Inactivo")
+                                    </span>
+                                </td>
+                                <td style="text-align: right; white-space: nowrap;">
+                                    <a href="@Url.Action("Editar", new { id = p.ProyectoId })" class="btn-mtp-action">
+                                        <i class="bi bi-pencil-square me-1"></i>Editar
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-5" style="background: #ffffff;">
+                                <i class="bi bi-layers d-block mb-2" style="font-size: 24px; color: var(--borde-suave);"></i>
+                                No se encontraron proyectos activos con los criterios de filtrado seleccionados.
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

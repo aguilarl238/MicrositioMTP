@@ -1,0 +1,382 @@
+﻿@model IEnumerable<MTPMicrositio.Entities.Usuario>
+@{
+    Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+    ViewBag.Title = "Usuarios Global MTP";
+}
+
+@Html.AntiForgeryToken()
+<link rel="stylesheet" href="/Content/Style.css">
+<link rel="stylesheet" href="/Content/custom.css">
+<style>
+    :root {
+        --azul-noche: #1B2E4B;
+        --verde-esmeralda: #1B7A61;
+        --blanco-frio: #F8F9FB;
+        --borde-suave: #DDE3EA;
+        --texto-secundario: #5A6E85;
+    }
+
+    .page-header-mtp {
+        margin-bottom: 24px;
+        border-bottom: 1px solid var(--borde-suave);
+        padding-bottom: 16px;
+    }
+
+    .page-title-mtp {
+        color: var(--azul-noche);
+        font-weight: 500;
+        font-size: 24px;
+        margin: 0;
+    }
+
+    .page-subtitle-mtp {
+        color: var(--texto-secundario);
+        font-size: 13px;
+        margin: 4px 0 0 0;
+    }
+
+    /* Botonera e Interacciones */
+    .btn-mtp-primary {
+        background-color: var(--verde-esmeralda);
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.2s ease;
+    }
+
+        .btn-mtp-primary:hover {
+            background-color: #145b48;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+    .btn-mtp-secondary {
+        background-color: var(--azul-noche);
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+    }
+
+        .btn-mtp-secondary:hover {
+            background-color: #111d30;
+            color: #ffffff;
+        }
+
+    .btn-mtp-cancel {
+        background-color: transparent;
+        color: var(--texto-secundario);
+        border: 1px solid var(--borde-suave);
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+        .btn-mtp-cancel:hover {
+            background-color: var(--blanco-frio);
+            color: var(--azul-noche);
+            border-color: var(--azul-noche);
+            text-decoration: none;
+        }
+
+    /* Caja de Filtros Ejecutiva */
+    .filter-card-mtp {
+        background: var(--blanco-frio);
+        border: 1px solid var(--borde-suave);
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    .label-mtp {
+        color: var(--azul-noche);
+        font-weight: 600;
+        font-size: 12px;
+        margin-bottom: 6px;
+        display: block;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+
+    .input-mtp {
+        width: 100%;
+        background-color: #ffffff;
+        border: 1px solid var(--borde-suave);
+        border-radius: 6px;
+        padding: 10px 14px;
+        font-size: 13px;
+        color: var(--azul-noche);
+        transition: all 0.2s ease;
+    }
+
+        .input-mtp:focus {
+            outline: none;
+            border-color: var(--verde-esmeralda);
+            box-shadow: 0 0 0 3px rgba(27, 122, 97, 0.08);
+        }
+
+    /* Componente Tabla MTP */
+    .card-table-container {
+        background: #ffffff;
+        border-radius: 8px;
+        border: 1px solid var(--borde-suave);
+        box-shadow: 0 2px 12px rgba(27, 46, 75, 0.03) !important;
+    }
+
+    .table-mtp th {
+        background-color: var(--azul-noche);
+        color: #ffffff;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 12px 16px !important;
+        border: none !important;
+    }
+
+    .table-mtp td {
+        padding: 14px 16px !important;
+        border-bottom: 1px solid var(--borde-suave) !important;
+        color: var(--azul-noche);
+        font-size: 13px;
+    }
+
+    .table-mtp tr:last-child td {
+        border-bottom: none !important;
+    }
+
+    /* Enlaces y Acciones Inline */
+    .btn-mtp-action {
+        color: var(--texto-secundario);
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        margin-left: 12px;
+        transition: color 0.2s ease;
+    }
+
+        .btn-mtp-action:hover {
+            color: var(--azul-noche);
+            text-decoration: underline;
+        }
+
+    .btn-mtp-action-danger {
+        color: #D9534F;
+        background: none;
+        border: none;
+        padding: 0;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        margin-left: 12px;
+    }
+
+        .btn-mtp-action-danger:hover {
+            text-decoration: underline;
+        }
+
+    /* Badges Corporativos de Estatus */
+    .badge-mtp-active {
+        background-color: #E8F7F3;
+        color: var(--verde-esmeralda);
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 11px;
+    }
+
+    .badge-mtp-inactive {
+        background-color: #FCE8E6;
+        color: #D9534F;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 11px;
+    }
+
+    /* Modal de Sistema */
+    .modal-mtp .modal-content {
+        border-radius: 8px;
+        border: 1px solid var(--borde-suave);
+    }
+
+    .modal-mtp .modal-header {
+        background-color: var(--azul-noche);
+        color: #ffffff;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+    }
+
+    .modal-mtp .modal-title {
+        font-size: 16px;
+        font-weight: 500;
+    }
+</style>
+
+<div class="container p-0" style="max-width: 1140px; margin-top: 1.5rem; margin-bottom: 3rem;">
+
+    <div class="page-header-mtp d-flex justify-content-between align-items-center flex-wrap">
+        <div>
+            <h2 class="page-title-mtp">Usuarios Compartidos</h2>
+            <p class="page-subtitle-mtp">Administración de credenciales corporativas y asignación a cuentas de clientes.</p>
+        </div>
+        <div class="mt-2 mt-sm-0">
+            <a href="@Url.Action("Crear", "Usuarios")" class="btn-mtp-primary">
+                <i class="fa fa-user-plus mr-1"></i> Nuevo Usuario
+            </a>
+        </div>
+    </div>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success bg-gradient border-0 text-white" style="background-color: var(--verde-esmeralda);" role="alert">
+            ✔ @TempData["Mensaje"]
+        </div>
+    }
+    @if (TempData["Error"] != null || ViewBag.Error != null)
+    {
+        <div class="alert alert-danger" style="background-color: #FCE8E6; color: #D9534F; border: 1px solid rgba(217,83,79,0.1);" role="alert">
+            ⚠ @(TempData["Error"] ?? ViewBag.Error)
+        </div>
+    }
+
+    @using (Html.BeginForm("Index", "Usuarios", FormMethod.Get, new { @class = "filter-card-mtp mb-4 shadow-sm" }))
+    {
+        <div class="row g-3 align-items-end">
+            <div class="col-md-5">
+                <label class="label-mtp">Buscar por Identidad</label>
+                <input type="text" name="buscar" value="@ViewBag.Buscar" class="input-mtp" placeholder="Escriba el nombre o dirección de correo..." />
+            </div>
+            <div class="col-md-3">
+                <label class="label-mtp">Estatus Operativo</label>
+                <select name="activo" class="input-mtp form-select" style="-webkit-appearance: none;">
+                    <option value="">--- Todos ---</option>
+                    <option value="true" @(ViewBag.Activo == true ? "selected" : "")>Cuentas Activas</option>
+                    <option value="false" @(ViewBag.Activo == false ? "selected" : "")>Cuentas Inactivas</option>
+                </select>
+            </div>
+            <div class="col-md-4 d-flex" style="gap: 12px;">
+                <button type="submit" class="btn-mtp-secondary w-100">Aplicar Filtros</button>
+                <a href="@Url.Action("Index", "Usuarios")" class="btn-mtp-cancel w-100 text-center">Limpiar</a>
+            </div>
+        </div>
+    }
+
+    <div class="card card-table-container p-0 border-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 table-mtp">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Nombre Completo</th>
+                        <th style="width: 25%;">Correo Electrónico</th>
+                        <th style="width: 15%;">Rol</th>
+                        <th style="width: 12%; text-align: center;">Estatus</th>
+                        <th style="width: 13%;">Alta en Sistema</th>
+                        <th style="width: 10%; text-align: right;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && System.Linq.Enumerable.Any(Model))
+                    {
+                        foreach (var usuario in Model)
+                        {
+                            <tr>
+                                <td style="font-weight: 500;">@usuario.Nombre</td>
+                                <td style="color: var(--texto-secundario);">@usuario.Email</td>
+                                <td>
+                                    <code style="color: var(--azul-noche); background: #EAEFF5; padding: 2px 6px; border-radius: 4px; font-size: 11px;">
+                                        @(usuario.RolNombre)
+                                    </code>
+                                </td>
+                                <td class="text-center">
+                                    <span class="@(usuario.Activo ? "badge-mtp-active" : "badge-mtp-inactive")">
+                                        @(usuario.Activo ? "Activo" : "Inactivo")
+                                    </span>
+                                </td>
+                                <td style="font-size: 12px; color: var(--texto-secundario);">
+                                    @usuario.FechaCreacion.ToString("dd/MM/yyyy HH:mm")
+                                </td>
+                                <td style="text-align: right; white-space: nowrap;">
+                                    <a href="@Url.Action("Editar", "Usuarios", new { id = usuario.UsuarioId })" class="btn-mtp-action">
+                                        Editar
+                                    </a>
+                                    <a href="@Url.Action("CambiarPassword", "Usuarios", new { id = usuario.UsuarioId })" class="btn-mtp-action">
+                                        Seguridad
+                                    </a>
+                                    <button type="button" class="btn-mtp-action-danger"
+                                            data-bs-toggle="modal" data-bs-target="#modalEliminar"
+                                            data-id="@usuario.UsuarioId" data-nombre="@usuario.Nombre">
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-5" style="background: #ffffff;">
+                                <i class="fa fa-folder-open-o d-block mb-2" style="font-size: 24px; color: var(--borde-suave);"></i>
+                                No se localizaron registros de usuario bajo los criterios ingresados.
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade modal-mtp" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                @using (Html.BeginForm("Eliminar", "Usuarios", FormMethod.Post, new { id = "formEliminar" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="eliminarId" />
+
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title" id="modalEliminarLabel">Confirmar Revocación de Cuenta</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body py-4" style="color: var(--azul-noche); font-size: 14px; line-height: 1.5;">
+                        ¿Está seguro de que desea eliminar permanentemente al usuario <strong id="eliminarNombre" style="color: #D9534F;"></strong>?<br />
+                        <span class="text-muted" style="font-size: 12px; display: block; margin-top: 6px;">
+                            Esta acción desvinculará sus privilegios de acceso de forma irreversible de acuerdo con el marco TMMi.
+                        </span>
+                    </div>
+                    <div class="modal-footer" style="border-top: 1px solid var(--borde-suave); background: var(--blanco-frio);">
+                        <button type="button" class="btn-mtp-cancel" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger" style="padding: 10px 24px; border-radius: 6px; font-size: 13px; font-weight: 500;">
+                            Confirmar Baja
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            var modalEliminar = document.getElementById('modalEliminar');
+            if (modalEliminar) {
+                modalEliminar.addEventListener('show.bs.modal', function (event) {
+                    var boton = event.relatedTarget;
+                    document.getElementById('eliminarId').value = boton.getAttribute('data-id');
+                    document.getElementById('eliminarNombre').textContent = boton.getAttribute('data-nombre');
+                });
+            }
+        });
+    </script>
+}

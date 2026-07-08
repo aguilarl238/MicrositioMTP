@@ -1,0 +1,46 @@
+/* Estilos Tecnológicos Profesionales para MTP Internacional */
+:root {
+    --mtp-dark: #0f172a;       /* Slate 900 - Fondo sobrio profundo */
+    --mtp-primary: #1e3a8a;    /* Azul Marino Corporativo */
+    --mtp-accent: #06b6d4;     /* Cian Eléctrico Tecnológico */
+    --mtp-light: #f8fafc;      /* Blanco Grisáceo Claro */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--mtp-light);
+    color: #334155;
+}
+
+.bg-tech-gradient {
+    background: linear-gradient(135deg, var(--mtp-dark) 0%, #1e293b 100%);
+    color: #ffffff;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #cbd5e1;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover, 
+.navbar-dark .navbar-nav .nav-link.active {
+    color: var(--mtp-accent) !important;
+}
+
+.tech-card {
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.tech-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--mtp-accent);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05) !important;
+}
+
+.text-accent {
+    color: var(--mtp-accent);
+}
+
+.border-accent-left {
+    border-left: 4px solid var(--mtp-accent);
+}

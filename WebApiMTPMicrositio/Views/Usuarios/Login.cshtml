@@ -1,0 +1,37 @@
+﻿@model MTPMicrositio.Models.Web.LoginViewModel
+
+@{
+    ViewBag.Title = "Iniciar Sesión";
+}
+
+<div class="container" style="max-width: 420px; margin-top: 4rem;">
+
+    <div class="card shadow-sm p-4">
+        <h2 class="text-center mb-1">Iniciar Sesión</h2>
+        <p class="text-muted text-center mb-4">Ingresa tus credenciales para continuar.</p>
+
+        @using (Html.BeginForm("Login", "Usuarios", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false, "", new { @class = "alert alert-danger", @style = "display:block;" })
+
+            <div class="form-group mb-3">
+                @Html.LabelFor(m => m.Email, new { @class = "form-label fw-bold" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", placeholder = "correo@ejemplo.com", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group mb-4">
+                @Html.LabelFor(m => m.Password, new { @class = "form-label fw-bold" })
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Contraseña" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,166 @@
+﻿@model MTPMicrositio.Models.Web.DocumentoIndexViewModel
+@{
+    ViewBag.Title = "Repositorio Corporativo de Documentos";
+}
+@{ Layout = "~/Views/Shared/_LayoutPortal.cshtml"; ViewBag.Title = "Modificar Proyecto"; }
+
+<link rel="stylesheet" href="/Content/Style.css">
+<link rel="stylesheet" href="/Content/custom.css">
+<style>
+    :root {
+        --azul-noche: #1B2E4B;
+        --verde-esmeralda: #1B7A61;
+        --esmeralda-claro: #3ECBAD;
+        --blanco-frio: #F8F9FB;
+        --borde-suave: #DDE3EA;
+    }
+
+    .page-title {
+        color: var(--azul-noche);
+        font-weight: 500;
+        margin-bottom: 24px;
+    }
+
+    .filter-box {
+        background: #fff;
+        padding: 24px;
+        border-radius: 8px;
+        border: 1px solid var(--borde-suave);
+        margin-bottom: 24px;
+    }
+
+    .btn-mtp {
+        background: var(--verde-esmeralda);
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+        .btn-mtp:hover {
+            background: #145b48;
+            color: #fff;
+        }
+
+    .table-mtp {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 16px;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid var(--borde-suave);
+    }
+
+        .table-mtp th {
+            background: var(--azul-noche);
+            color: #fff;
+            padding: 12px 16px;
+            font-size: 12px;
+            text-transform: uppercase;
+            text-align: left;
+        }
+
+        .table-mtp td {
+            padding: 14px 16px;
+            font-size: 13px;
+            border-bottom: 1px solid var(--borde-suave);
+            color: var(--azul-noche);
+        }
+
+    .badge-active {
+        background: #E8F7F3;
+        color: var(--verde-esmeralda);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 11px;
+    }
+
+    .badge-inactive {
+        background: #FCE8E6;
+        color: #D9534F;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 11px;
+    }
+</style>
+
+<h2 class="page-title">Gobernanza de Proyectos: <span style="color: var(--verde-esmeralda)">Control Documental</span></h2>
+
+@if (TempData["Success"] != null)
+{
+    <div style="background: #E8F7F3; color: var(--verde-esmeralda); padding: 12px; border-radius: 6px; margin-bottom: 16px; font-size: 13px;">
+        ✔ @TempData["Success"]
+    </div>
+}
+
+<div class="filter-box">
+    @using (Html.BeginForm("Index", "Documentos", FormMethod.Get, new { @class = "row align-items-end" }))
+    {
+        <div class="col-md-4">
+            <label style="font-size: 11px; font-weight: 600; text-transform: uppercase; display:block; margin-bottom:6px;">Filtrar por Cliente</label>
+            @Html.DropDownListFor(m => m.FiltroClienteId, Model.Clientes, "--- Todos los Clientes ---", new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            <label style="font-size: 11px; font-weight: 600; text-transform: uppercase; display:block; margin-bottom:6px;">Filtrar por Proyecto</label>
+            @Html.DropDownListFor(m => m.FiltroProyectoId, Model.Proyectos, "--- Todos los Proyectos ---", new { @class = "form-control" })
+        </div>
+        <div class="col-md-4" style="margin-top: 15px;">
+            <button type="submit" class="btn-mtp">Aplicar Filtros Analíticos</button>
+            <a href="@Url.Action("Formulario", "Documentos")" class="btn-mtp" style="background: var(--azul-noche)">+ Nuevo Documento</a>
+        </div>
+    }
+</div>
+
+<table class="table-mtp">
+    <thead>
+        <tr>
+            <th>Documento</th>
+            <th>Cliente</th>
+            <th>Proyecto</th>
+            <th>Tipo</th>
+            <th>Estatus</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Documentos.Any())
+        {
+            <tr>
+                <td colspan="7" style="text-align: center; color: #9AACBA; padding: 32px;">No se encontraron registros de calidad bajo los criterios seleccionados.</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var doc in Model.Documentos)
+            {
+                <tr>
+                    <td><strong>@doc.Nombre</strong></td>
+                    <td>@doc.ClienteNombre</td>
+                    <td>@doc.ProyectoNombre</td>
+                    <td>@doc.TipoDocumentoNombre</td>
+                    <td><span style="color: #1B7A61; font-weight:500;">@doc.EstatusNombre</span></td>
+                    <td>
+                        <span class="@(doc.Activo ? "badge-active" : "badge-inactive")">
+                            @(doc.Activo ? "Vigente" : "Inactivo")
+                        </span>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Formulario", "Documentos", new { id = doc.DocumentoId })" style="color: var(--azul-noche); font-weight:600; text-decoration:none; margin-right: 12px;">Editar</a>
+
+                        <a href="@Url.Action("Descargar", "Documentos", new { id = doc.DocumentoId })" style="color: var(--verde-esmeralda); font-weight:600; text-decoration:none;" title="Descargar archivo digital adjunto">
+                            📥 Descargar Fichero
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

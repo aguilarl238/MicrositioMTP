@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>MTP Internacional | Digital Business Assurance</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Content/custom.css">
+    <link rel="stylesheet" href="~/Content/Style.css">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        /* Estilos del menú principal */
+    nav {
+        background-color: #1B2E4B; /* Azul solicitado */
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+    }
+
+    nav ul li {
+        position: relative; /* Necesario para submenús */
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 14px 20px;
+        color: white;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+
+    nav ul li a:hover {
+        background-color: #2C4A77; /* Azul más claro al pasar */
+    }
+
+    /* Submenús ocultos por defecto */
+    nav ul li ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #1B2E4B;
+        min-width: 180px;
+        z-index: 1000;
+        flex-direction: column;
+    }
+
+    nav ul li ul li a {
+        padding: 12px 16px;
+    }
+
+    /* Mostrar submenú al pasar el ratón */
+    nav ul li:hover > ul {
+        display: flex;
+    }
+
+    /* Responsive: menú vertical en pantallas pequeñas */
+    @*@media (max-width: 768px) {
+        nav ul {
+            flex-direction: column;
+        }
+        nav ul li ul {
+            position: static;
+        }
+    }*@
+
+    </style>
+</head>
+<body>
+    <header class="navbar navbar-expand-lg navbar-dark bg-tech-gradient sticky-top border-bottom border-secondary">
+        <div class="container">
+            @*<span class="navbar-brand fw-bold"><a class="nav-link" href="@Url.Action("Index", "Portal")">MTP PORTAL</a> <span class="badge bg-info id=" user-badge" text-dark ms-2">Rol</span></span>*@
+            <div class="nav-logo"><img src="data:image/png;base64,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" alt="MTP Internacional" style="height:36px;"></div>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-tech-gradient sticky-top border-bottom border-secondary">
+                <div class="container">
+                    @*<a class="navbar-brand fw-bold text-uppercase" href="@Url.Action("Index", "Home")">MTP <span class="text-accent">Internacional</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>*@
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto fw-semibold">
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Portal")">Portal</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Clientes")">Clientes</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Usuarios")">Usuarios</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Proyecto")">Proyectos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Documentos")">Legal Administrativo</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="d-flex align-items-center gap-3">
+                <span class="text-white small fw-semibold" id="username-display">Usuario</span>
+                @*<button onclick="@Url.Action("Index", "Home")" class="btn btn-sm btn-outline-danger px-3">Cerrar Sesión</button>*@
+                <a class="btn btn-outline-danger text-white px-4" href="@Url.Action("Index", "Home")">Cerrar Sesión</a>
+            </div>
+        </div>
+
+    </header>
+    @*@Html.Partial("~/Views/Portal/_Sidebar.cshtml");*@
+    @RenderBody().
+
+    <footer class="bg-dark text-muted py-4 border-top border-secondary">
+        <div class="container text-center">
+            <p class="small mb-0">&copy; 2026 MTP Internacional. Todos los derechos reservados. Información Confidencial.</p>
+        </div>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("Scripts", required: false)
+    @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>*@
+</body>
+</html>
+

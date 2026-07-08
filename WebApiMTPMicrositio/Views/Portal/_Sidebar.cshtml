@@ -1,0 +1,15 @@
+<!-- Menu Lateral Dinámico por Roles SQL -->
+@*@model IEnumerable<MTP_Micrositio.Models.MenuViewModel>*@
+<div class='sidebar'>
+    <ul class='nav flex-column'>
+        @*@foreach (var item in Model)
+        {
+            <li class='nav-item'><a class='nav-link' href='~/@item.Controller/@item.Action'>@item.Titulo</a></li>
+        }*@
+
+        <li class='nav-item'><a class='nav-link' href='#'>Clientes</a></li>
+        <li class='nav-item'><a class='nav-link' href='#'>Usuarios</a></li>
+        <li class='nav-item'><a class='nav-link' href='#'>Proyectos</a></li>
+        <li class='nav-item'><a class='nav-link' href='#'>Legal Administrativo</a></li>
+    </ul>
+</div>

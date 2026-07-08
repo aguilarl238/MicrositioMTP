@@ -1,0 +1,75 @@
+﻿@model WebApiMTPMicrositio.Models.Web.ContactoViewModel
+<!-- HERO -->
+<section class="hero-contact">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+        <div class="hero-badge">
+            <div class="hero-badge-dot"></div>
+            Atención B2B Global e Inmediata
+        </div>
+        <h1 class="hero-h1">Hablemos de la <em>estabilidad y madurez</em> de tus sistemas.</h1>
+        <p class="hero-sub">Ponte en contacto con nuestros ingenieros certificados. Diseñamos células de QA avanzadas a la medida de tus desafíos de infraestructura y software.</p>
+    </div>
+</section>
+
+<!-- CUERPO PRINCIPAL: FORMULARIO Y CONTACTO -->
+<main class="contact-section">
+    <div class="max-container">
+        <div class="contact-grid">
+
+            <!-- COLUMNA IZQUIERDA: TARJETAS DE CONFIANZA -->
+            <div class="contact-info-panel">
+
+                <div class="info-card">
+                    <h3>⏱️ Velocidad Operativa MTP</h3>
+                    <p>Sabemos que el mercado no espera. Evaluamos tus requerimientos y te asignamos un arquitecto de QA senior para coordinar un <span class="highlight">análisis técnico preliminar sin costo</span>.</p>
+                    <span class="sla-badge">Respuesta en menos de 24 horas laborables</span>
+                </div>
+
+                <div class="info-card">
+                    <h3>🚀 Integración Ágil</h3>
+                    <p>Contamos con un modelo de gobernanza bajo la norma **TMMi Nivel 5** que nos permite <span class="highlight">desplegar células de ingenieros certificados en menos de una semana</span>, listos para acoplarse a tus sprints actuales.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>🔒 Seguridad de la Información</h3>
+                    <p>Todos nuestros procesos de diagnóstico e ingesta técnica están estrictamente regulados bajo estándares de cumplimiento internacional, garantizando un <span class="highlight">manejo de datos confidencial y blindado</span>.</p>
+                </div>
+
+            </div>
+
+            <!-- COLUMNA DERECHA: FORMULARIO TÉCNICO BINDING CON .NET -->
+            <div class="form-box">
+                @using (Html.BeginForm("Contacto", "Home", FormMethod.Post, new { id = "contactForm" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.NombreCompleto, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.NombreCompleto, new { @class = "form-control-input", placeholder = "Ej. Carlos Mendoza" })
+                        @Html.ValidationMessageFor(m => m.NombreCompleto, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.CorreoCorporativo, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.CorreoCorporativo, new { @class = "form-control-input", placeholder = "carlos.mendoza@empresa.com", type = "email" })
+                        @Html.ValidationMessageFor(m => m.CorreoCorporativo, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group full">
+                        @Html.LabelFor(m => m.Mensaje, new { @class = "form-label" })
+                        @Html.TextAreaFor(m => m.Mensaje, new { @class = "form-control-textarea", placeholder = "Indica tecnologías utilizadas, fechas estimadas de lanzamiento o problemáticas de rendimiento actuales..." })
+                        @Html.ValidationMessageFor(m => m.Mensaje, "", new { @class = "text-danger" })
+                    </div>
+
+                    <button class="form-submit-btn" type="submit">Iniciar Consultoría Técnica Especializada</button>
+
+                    <p class="form-privacy-note">
+                        Al enviar este formulario aceptas el tratamiento de tus datos para fines exclusivamente comerciales de ingeniería y QA bajo los términos legales de MTP Internacional.
+                    </p>
+                }
+            </div>
+
+        </div>
+    </div>
+</main>

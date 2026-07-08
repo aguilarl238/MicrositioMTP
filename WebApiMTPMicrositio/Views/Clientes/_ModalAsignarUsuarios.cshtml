@@ -1,0 +1,189 @@
+﻿<!-- Views/Cliente/_ModalAsignarUsuarios.cshtml -->
+@model List<Guid>
+
+<style>
+    .modal-mtp-header {
+        background-color: var(--azul-noche);
+        color: #ffffff;
+    }
+
+    .user-table-scroll {
+        max-height: 350px;
+        overflow-y: auto;
+    }
+
+    .table-modal-mtp th {
+        background-color: var(--blanco-frio);
+        color: var(--azul-noche);
+        font-size: 11px;
+        text-transform: uppercase;
+        font-weight: 600;
+        padding: 10px !important;
+    }
+
+    .table-modal-mtp td {
+        padding: 10px !important;
+        font-size: 13px;
+    }
+
+    .counter-badge-mtp {
+        background-color: var(--verde-esmeralda);
+        color: #ffffff;
+        font-size: 11px;
+        padding: 3px 8px;
+        border-radius: 20px;
+        font-weight: 600;
+    }
+</style>
+
+<!-- Botón de apertura integrado al estilo del portal -->
+<div class="status-panel-mtp d-flex justify-content-between align-items-center p-3 mb-3" style="background: var(--blanco-frio); border: 1px solid var(--borde-suave); border-radius: 6px;">
+    <div>
+        <span class="label-mtp m-0">Usuarios y Líderes Asignados</span>
+        <small class="text-muted">Gestione los consultores vinculados operativamente a este cliente.</small>
+    </div>
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalUsuariosMtp" id="btnAbrirModalUsuarios">
+        <i class="bi bi-people me-1"></i> Asignar Usuarios (<span id="lblContadorUsuarios">0</span>)
+    </button>
+</div>
+
+<!-- Contenedor de inputs ocultos que se enviarán al Controller -->
+<div id="usuariosHiddenContainer">
+    @if (Model != null)
+    {
+        for (int i = 0; i < Model.Count; i++)
+        {
+            <input type="hidden" name="UsuariosSeleccionadosIds[@i]" value="@Model[i]" data-userid="@Model[i]" />
+        }
+    }
+</div>
+
+<!-- Estructura del Modal -->
+<div class="modal fade" id="modalUsuariosMtp" tabindex="-1" aria-labelledby="modalUsuariosMtpLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header modal-mtp-header py-3">
+                <h5 class="modal-title fs-6 fw-semibold" id="modalUsuariosMtpLabel"><i class="bi bi-person-check-fill me-2"></i>Selección de Usuarios Corporativos</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <input type="text" id="txtBuscarUsuarioModal" class="input-mtp form-control-sm w-70" placeholder="Buscar usuario por nombre..." style="padding: 6px 12px;" />
+                    <span class="counter-badge-mtp"><span id="lblModalSeleccionados">0</span> Seleccionados</span>
+                </div>
+
+                <div class="user-table-scroll border rounded">
+                    <table class="table table-hover table-modal-mtp mb-0 align-middle">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%; text-align: center;">Vínculo</th>
+                                <th style="width: 85%;">Nombre Completo del Colaborador</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyUsuariosModal">
+                            <tr>
+                                <td colspan="2" class="text-center text-muted py-3">Cargando catálogo de usuarios...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer bg-light py-2">
+                <button type="button" class="btn-mtp-cancel py-2" data-bs-dismiss="modal" style="font-size:12px;">Confirmar y Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // IDs precargados desde el modelo (Edit)
+        let usuariosSeleccionados = [];
+        document.querySelectorAll("#usuariosHiddenContainer input").forEach(input => {
+            usuariosSeleccionados.push(input.value.toLowerCase());
+        });
+
+        actualizarContadores();
+
+        // Llamar a la API de listado general
+        fetch('/api/usuarios/All')
+            .then(response => response.json())
+            .then(data => {
+                renderizarUsuarios(data);
+            })
+            .catch(error => {
+                console.error("Error al recuperar usuarios:", error);
+                document.getElementById("tbodyUsuariosModal").innerHTML = `<tr><td colspan="2" class="text-center text-danger py-3">Error al conectar con la API técnica.</td></tr>`;
+            });
+
+        function renderizarUsuarios(usuarios) {
+            const tbody = document.getElementById("tbodyUsuariosModal");
+            tbody.innerHTML = "";
+
+            if(usuarios.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="2" class="text-center text-muted py-3">No hay usuarios disponibles.</td></tr>`;
+                return;
+            }
+
+            usuarios.forEach(user => {
+                const isChecked = usuariosSeleccionados.includes(user.UsuarioId.toLowerCase()) ? "checked" : "";
+                const row = document.createElement("tr");
+                row.className = "usuario-row-modal";
+                row.innerHTML = `
+                    <td class="text-center">
+                        <input type="checkbox" class="chk-usuario-modal" value="${user.UsuarioId}" data-nombre="${user.NombreCompleto}" ${isChecked} style="accent-color: var(--verde-esmeralda); width:16px; height:16px; cursor:pointer;" />
+                    </td>
+                    <td class="text-dark fw-medium match-nombre">${user.NombreCompleto}</td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            // Registrar eventos de cambio en los checkboxes
+            document.querySelectorAll(".chk-usuario-modal").forEach(chk => {
+                chk.addEventListener("change", function () {
+                    const userId = this.value.toLowerCase();
+                    if (this.checked) {
+                        if (!usuariosSeleccionados.includes(userId)) {
+                            usuariosSeleccionados.push(userId);
+                        }
+                    } else {
+                        usuariosSeleccionados = usuariosSeleccionados.filter(id => id !== userId);
+                    }
+                    actualizarInputsOcultos();
+                    actualizarContadores();
+                });
+            });
+        }
+
+        // Buscador reactivo en el modal
+        document.getElementById("txtBuscarUsuarioModal").addEventListener("input", function() {
+            const busqueda = this.value.toLowerCase().trim();
+            document.querySelectorAll(".usuario-row-modal").forEach(row => {
+                const nombre = row.querySelector(".match-nombre").textContent.toLowerCase();
+                if(nombre.includes(busqueda)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        });
+
+        function actualizarInputsOcultos() {
+            const container = document.getElementById("usuariosHiddenContainer");
+            container.innerHTML = "";
+            usuariosSeleccionados.forEach((id, index) => {
+                const input = document.createElement("input");
+                input.type = "hidden";
+                input.name = `UsuariosSeleccionadosIds[${index}]`;
+                input.value = id;
+                container.appendChild(input);
+            });
+        }
+
+        function actualizarContadores() {
+            const total = usuariosSeleccionados.length;
+            document.getElementById("lblContadorUsuarios").textContent = total;
+            document.getElementById("lblModalSeleccionados").textContent = total;
+        }
+    });
+</script>

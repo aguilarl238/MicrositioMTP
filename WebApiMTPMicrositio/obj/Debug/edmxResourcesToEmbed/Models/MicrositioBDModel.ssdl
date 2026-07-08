@@ -1,0 +1,652 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MTP_MicrositioDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AuditoriaCambios">
+    <Key>
+      <PropertyRef Name="AuditoriaId" />
+    </Key>
+    <Property Name="AuditoriaId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Tabla" Type="nvarchar" MaxLength="100" />
+    <Property Name="RegistroId" Type="uniqueidentifier" />
+    <Property Name="Accion" Type="nvarchar" MaxLength="50" />
+    <Property Name="DatosAntes" Type="nvarchar(max)" />
+    <Property Name="DatosDespues" Type="nvarchar(max)" />
+    <Property Name="UsuarioId" Type="uniqueidentifier" />
+    <Property Name="Fecha" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="ClienteId" />
+    </Key>
+    <Property Name="ClienteId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="200" />
+    <Property Name="EstatusId" Type="uniqueidentifier" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+    <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="ComentariosProyecto">
+    <Key>
+      <PropertyRef Name="ComentarioId" />
+    </Key>
+    <Property Name="ComentarioId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProyectoId" Type="uniqueidentifier" />
+    <Property Name="UsuarioId" Type="uniqueidentifier" />
+    <Property Name="Descripcion" Type="nvarchar(max)" />
+    <Property Name="PrioridadId" Type="uniqueidentifier" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="EstatusId" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="Componentes">
+    <Key>
+      <PropertyRef Name="ComponenteId" />
+    </Key>
+    <Property Name="ComponenteId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="150" />
+    <Property Name="Tipo" Type="nvarchar" MaxLength="100" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="Documentos">
+    <Key>
+      <PropertyRef Name="DocumentoId" />
+    </Key>
+    <Property Name="DocumentoId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ClienteId" Type="uniqueidentifier" />
+    <Property Name="TipoDocumentoId" Type="uniqueidentifier" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="200" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="EstatusId" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="Estatus">
+    <Key>
+      <PropertyRef Name="EstatusId" />
+    </Key>
+    <Property Name="EstatusId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="Seccion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="MenuId" />
+    </Key>
+    <Property Name="MenuId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="150" />
+    <Property Name="Ruta" Type="nvarchar" MaxLength="300" />
+    <Property Name="Icono" Type="nvarchar" MaxLength="100" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="MenuPadreId" Type="uniqueidentifier" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="PermisoRolComponente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RolId" Type="uniqueidentifier" />
+    <Property Name="ComponenteId" Type="uniqueidentifier" />
+    <Property Name="PuedeVer" Type="bit" />
+    <Property Name="PuedeEditar" Type="bit" />
+    <Property Name="PuedeEliminar" Type="bit" />
+  </EntityType>
+  <EntityType Name="PermisoRolMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RolId" Type="uniqueidentifier" />
+    <Property Name="MenuId" Type="uniqueidentifier" />
+    <Property Name="PuedeVer" Type="bit" />
+    <Property Name="PuedeEditar" Type="bit" />
+  </EntityType>
+  <EntityType Name="PrioridadComentario">
+    <Key>
+      <PropertyRef Name="PrioridadId" />
+    </Key>
+    <Property Name="PrioridadId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Nivel" Type="int" />
+  </EntityType>
+  <EntityType Name="Proyectos">
+    <Key>
+      <PropertyRef Name="ProyectoId" />
+    </Key>
+    <Property Name="ProyectoId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ClienteId" Type="uniqueidentifier" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="200" />
+    <Property Name="Tipo" Type="nvarchar" MaxLength="50" />
+    <Property Name="EstatusId" Type="uniqueidentifier" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="FechaInicio" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RolId" />
+    </Key>
+    <Property Name="RolId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TipoDocumento">
+    <Key>
+      <PropertyRef Name="TipoDocumentoId" />
+    </Key>
+    <Property Name="TipoDocumentoId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="UsuarioRol">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UsuarioId" Type="uniqueidentifier" />
+    <Property Name="RolId" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="UsuarioId" />
+    </Key>
+    <Property Name="UsuarioId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ClienteId" Type="uniqueidentifier" />
+    <Property Name="Email" Type="nvarchar" MaxLength="150" />
+    <Property Name="PasswordHash" Type="nvarchar" MaxLength="500" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="200" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="FechaCreacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="VersionesDocumento">
+    <Key>
+      <PropertyRef Name="VersionId" />
+    </Key>
+    <Property Name="VersionId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DocumentoId" Type="uniqueidentifier" />
+    <Property Name="VersionNumero" Type="int" />
+    <Property Name="UrlArchivo" Type="nvarchar" MaxLength="500" />
+    <Property Name="UsuarioId" Type="uniqueidentifier" />
+    <Property Name="Fecha" Type="datetime" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'MTP_MicrositioDB.dbo.vw_ComponentesPorUsuario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vw_ComponentesPorUsuario">
+    <Key>
+      <PropertyRef Name="UsuarioId" />
+    </Key>
+    <Property Name="UsuarioId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="150" />
+    <Property Name="PuedeVer" Type="bit" />
+    <Property Name="PuedeEditar" Type="bit" />
+    <Property Name="PuedeEliminar" Type="bit" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'MTP_MicrositioDB.dbo.vw_MenuPorUsuario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vw_MenuPorUsuario">
+    <Key>
+      <PropertyRef Name="UsuarioId" />
+      <PropertyRef Name="MenuId" />
+    </Key>
+    <Property Name="UsuarioId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MenuId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="150" />
+    <Property Name="Ruta" Type="nvarchar" MaxLength="300" />
+    <Property Name="Orden" Type="int" />
+  </EntityType>
+  <Association Name="FK__Clientes__Estatu__571DF1D5">
+    <End Role="Estatus" Type="Self.Estatus" Multiplicity="0..1" />
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estatus">
+        <PropertyRef Name="EstatusId" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="EstatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comentari__Prior__76969D2E">
+    <End Role="PrioridadComentario" Type="Self.PrioridadComentario" Multiplicity="0..1" />
+    <End Role="ComentariosProyecto" Type="Self.ComentariosProyecto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PrioridadComentario">
+        <PropertyRef Name="PrioridadId" />
+      </Principal>
+      <Dependent Role="ComentariosProyecto">
+        <PropertyRef Name="PrioridadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comentari__Proye__75A278F5">
+    <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="0..1" />
+    <End Role="ComentariosProyecto" Type="Self.ComentariosProyecto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proyectos">
+        <PropertyRef Name="ProyectoId" />
+      </Principal>
+      <Dependent Role="ComentariosProyecto">
+        <PropertyRef Name="ProyectoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Documento__Clien__6C190EBB">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="Documentos" Type="Self.Documentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="ClienteId" />
+      </Principal>
+      <Dependent Role="Documentos">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Documento__TipoD__6D0D32F4">
+    <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="0..1" />
+    <End Role="Documentos" Type="Self.Documentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDocumento">
+        <PropertyRef Name="TipoDocumentoId" />
+      </Principal>
+      <Dependent Role="Documentos">
+        <PropertyRef Name="TipoDocumentoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Menu__MenuPadreI__07C12930">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+    <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="MenuId" />
+      </Principal>
+      <Dependent Role="Menu1">
+        <PropertyRef Name="MenuPadreId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PermisoRo__Compo__14270015">
+    <End Role="Componentes" Type="Self.Componentes" Multiplicity="0..1" />
+    <End Role="PermisoRolComponente" Type="Self.PermisoRolComponente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Componentes">
+        <PropertyRef Name="ComponenteId" />
+      </Principal>
+      <Dependent Role="PermisoRolComponente">
+        <PropertyRef Name="ComponenteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PermisoRo__MenuI__0F624AF8">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+    <End Role="PermisoRolMenu" Type="Self.PermisoRolMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="MenuId" />
+      </Principal>
+      <Dependent Role="PermisoRolMenu">
+        <PropertyRef Name="MenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PermisoRo__RolId__0E6E26BF">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="PermisoRolMenu" Type="Self.PermisoRolMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RolId" />
+      </Principal>
+      <Dependent Role="PermisoRolMenu">
+        <PropertyRef Name="RolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PermisoRo__RolId__1332DBDC">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="PermisoRolComponente" Type="Self.PermisoRolComponente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RolId" />
+      </Principal>
+      <Dependent Role="PermisoRolComponente">
+        <PropertyRef Name="RolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Proyectos__Clien__656C112C">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="ClienteId" />
+      </Principal>
+      <Dependent Role="Proyectos">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Proyectos__Estat__66603565">
+    <End Role="Estatus" Type="Self.Estatus" Multiplicity="0..1" />
+    <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estatus">
+        <PropertyRef Name="EstatusId" />
+      </Principal>
+      <Dependent Role="Proyectos">
+        <PropertyRef Name="EstatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UsuarioRo__RolId__619B8048">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="UsuarioRol" Type="Self.UsuarioRol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RolId" />
+      </Principal>
+      <Dependent Role="UsuarioRol">
+        <PropertyRef Name="RolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UsuarioRo__Usuar__60A75C0F">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="UsuarioRol" Type="Self.UsuarioRol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="UsuarioId" />
+      </Principal>
+      <Dependent Role="UsuarioRol">
+        <PropertyRef Name="UsuarioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuarios__Client__5BE2A6F2">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="ClienteId" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Versiones__Docum__70DDC3D8">
+    <End Role="Documentos" Type="Self.Documentos" Multiplicity="0..1" />
+    <End Role="VersionesDocumento" Type="Self.VersionesDocumento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Documentos">
+        <PropertyRef Name="DocumentoId" />
+      </Principal>
+      <Dependent Role="VersionesDocumento">
+        <PropertyRef Name="DocumentoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ComentariosProyecto_Estatus">
+    <End Role="Estatus" Type="Self.Estatus" Multiplicity="0..1" />
+    <End Role="ComentariosProyecto" Type="Self.ComentariosProyecto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estatus">
+        <PropertyRef Name="EstatusId" />
+      </Principal>
+      <Dependent Role="ComentariosProyecto">
+        <PropertyRef Name="EstatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documentos_Estatus">
+    <End Role="Estatus" Type="Self.Estatus" Multiplicity="0..1" />
+    <End Role="Documentos" Type="Self.Documentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estatus">
+        <PropertyRef Name="EstatusId" />
+      </Principal>
+      <Dependent Role="Documentos">
+        <PropertyRef Name="EstatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_Cliente_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ClienteId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_Cliente_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="EstatusClienteId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="ClienteId" Type="uniqueidentifier" Mode="InOut" />
+  </Function>
+  <Function Name="sp_Cliente_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_Cliente_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ClienteId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="EstatusClienteId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_Comentario_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ComentarioId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_Comentario_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProyectoId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="PrioridadId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="ComentarioId" Type="uniqueidentifier" Mode="InOut" />
+  </Function>
+  <Function Name="sp_Comentario_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_Componente_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ComponenteId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_Componente_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="Tipo" Type="nvarchar" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="ComponenteId" Type="uniqueidentifier" Mode="InOut" />
+  </Function>
+  <Function Name="sp_Componente_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_Componente_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ComponenteId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="Tipo" Type="nvarchar" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_Documento_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DocumentoId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_Documento_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ClienteId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="TipoDocumentoId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="Url" Type="nvarchar" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="DocumentoId" Type="uniqueidentifier" Mode="InOut" />
+  </Function>
+  <Function Name="sp_Documento_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_Menu_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MenuId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_Menu_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="Ruta" Type="nvarchar" Mode="In" />
+    <Parameter Name="Orden" Type="int" Mode="In" />
+    <Parameter Name="MenuPadreId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="MenuId" Type="uniqueidentifier" Mode="InOut" />
+  </Function>
+  <Function Name="sp_Menu_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_Menu_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MenuId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="Ruta" Type="nvarchar" Mode="In" />
+    <Parameter Name="Orden" Type="int" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_PermisoRolComponente_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_PermisoRolComponente_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RolId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="ComponenteId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="PuedeVer" Type="bit" Mode="In" />
+    <Parameter Name="PuedeEditar" Type="bit" Mode="In" />
+    <Parameter Name="PuedeEliminar" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="InOut" />
+  </Function>
+  <Function Name="sp_PermisoRolComponente_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_PermisoRolComponente_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="PuedeVer" Type="bit" Mode="In" />
+    <Parameter Name="PuedeEditar" Type="bit" Mode="In" />
+    <Parameter Name="PuedeEliminar" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_PermisoRolMenu_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_PermisoRolMenu_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RolId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="MenuId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="PuedeVer" Type="bit" Mode="In" />
+    <Parameter Name="PuedeEditar" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="InOut" />
+  </Function>
+  <Function Name="sp_PermisoRolMenu_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_PermisoRolMenu_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="PuedeVer" Type="bit" Mode="In" />
+    <Parameter Name="PuedeEditar" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_Proyecto_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProyectoId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_Proyecto_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ClienteId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="Tipo" Type="nvarchar" Mode="In" />
+    <Parameter Name="EstatusProyectoId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="ProyectoId" Type="uniqueidentifier" Mode="InOut" />
+  </Function>
+  <Function Name="sp_Proyecto_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_Proyecto_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProyectoId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="EstatusProyectoId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="UsuarioId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <EntityContainer Name="MTP_MicrositioDBModelStoreContainer">
+    <EntitySet Name="AuditoriaCambios" EntityType="Self.AuditoriaCambios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ComentariosProyecto" EntityType="Self.ComentariosProyecto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Componentes" EntityType="Self.Componentes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Documentos" EntityType="Self.Documentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Estatus" EntityType="Self.Estatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PermisoRolComponente" EntityType="Self.PermisoRolComponente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PermisoRolMenu" EntityType="Self.PermisoRolMenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PrioridadComentario" EntityType="Self.PrioridadComentario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Proyectos" EntityType="Self.Proyectos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VersionesDocumento" EntityType="Self.VersionesDocumento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vw_ComponentesPorUsuario" EntityType="Self.vw_ComponentesPorUsuario" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_ComponentesPorUsuario].[UsuarioId] AS [UsuarioId], 
+    [vw_ComponentesPorUsuario].[Nombre] AS [Nombre], 
+    [vw_ComponentesPorUsuario].[PuedeVer] AS [PuedeVer], 
+    [vw_ComponentesPorUsuario].[PuedeEditar] AS [PuedeEditar], 
+    [vw_ComponentesPorUsuario].[PuedeEliminar] AS [PuedeEliminar]
+    FROM [dbo].[vw_ComponentesPorUsuario] AS [vw_ComponentesPorUsuario]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_MenuPorUsuario" EntityType="Self.vw_MenuPorUsuario" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_MenuPorUsuario].[UsuarioId] AS [UsuarioId], 
+    [vw_MenuPorUsuario].[MenuId] AS [MenuId], 
+    [vw_MenuPorUsuario].[Nombre] AS [Nombre], 
+    [vw_MenuPorUsuario].[Ruta] AS [Ruta], 
+    [vw_MenuPorUsuario].[Orden] AS [Orden]
+    FROM [dbo].[vw_MenuPorUsuario] AS [vw_MenuPorUsuario]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Clientes__Estatu__571DF1D5" Association="Self.FK__Clientes__Estatu__571DF1D5">
+      <End Role="Estatus" EntitySet="Estatus" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comentari__Prior__76969D2E" Association="Self.FK__Comentari__Prior__76969D2E">
+      <End Role="PrioridadComentario" EntitySet="PrioridadComentario" />
+      <End Role="ComentariosProyecto" EntitySet="ComentariosProyecto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comentari__Proye__75A278F5" Association="Self.FK__Comentari__Proye__75A278F5">
+      <End Role="Proyectos" EntitySet="Proyectos" />
+      <End Role="ComentariosProyecto" EntitySet="ComentariosProyecto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Documento__Clien__6C190EBB" Association="Self.FK__Documento__Clien__6C190EBB">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Documentos" EntitySet="Documentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Documento__TipoD__6D0D32F4" Association="Self.FK__Documento__TipoD__6D0D32F4">
+      <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+      <End Role="Documentos" EntitySet="Documentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Menu__MenuPadreI__07C12930" Association="Self.FK__Menu__MenuPadreI__07C12930">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="Menu1" EntitySet="Menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PermisoRo__Compo__14270015" Association="Self.FK__PermisoRo__Compo__14270015">
+      <End Role="Componentes" EntitySet="Componentes" />
+      <End Role="PermisoRolComponente" EntitySet="PermisoRolComponente" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PermisoRo__MenuI__0F624AF8" Association="Self.FK__PermisoRo__MenuI__0F624AF8">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="PermisoRolMenu" EntitySet="PermisoRolMenu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PermisoRo__RolId__0E6E26BF" Association="Self.FK__PermisoRo__RolId__0E6E26BF">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="PermisoRolMenu" EntitySet="PermisoRolMenu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PermisoRo__RolId__1332DBDC" Association="Self.FK__PermisoRo__RolId__1332DBDC">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="PermisoRolComponente" EntitySet="PermisoRolComponente" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Proyectos__Clien__656C112C" Association="Self.FK__Proyectos__Clien__656C112C">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Proyectos" EntitySet="Proyectos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Proyectos__Estat__66603565" Association="Self.FK__Proyectos__Estat__66603565">
+      <End Role="Estatus" EntitySet="Estatus" />
+      <End Role="Proyectos" EntitySet="Proyectos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UsuarioRo__RolId__619B8048" Association="Self.FK__UsuarioRo__RolId__619B8048">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UsuarioRol" EntitySet="UsuarioRol" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UsuarioRo__Usuar__60A75C0F" Association="Self.FK__UsuarioRo__Usuar__60A75C0F">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="UsuarioRol" EntitySet="UsuarioRol" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuarios__Client__5BE2A6F2" Association="Self.FK__Usuarios__Client__5BE2A6F2">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Versiones__Docum__70DDC3D8" Association="Self.FK__Versiones__Docum__70DDC3D8">
+      <End Role="Documentos" EntitySet="Documentos" />
+      <End Role="VersionesDocumento" EntitySet="VersionesDocumento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ComentariosProyecto_Estatus" Association="Self.FK_ComentariosProyecto_Estatus">
+      <End Role="Estatus" EntitySet="Estatus" />
+      <End Role="ComentariosProyecto" EntitySet="ComentariosProyecto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documentos_Estatus" Association="Self.FK_Documentos_Estatus">
+      <End Role="Estatus" EntitySet="Estatus" />
+      <End Role="Documentos" EntitySet="Documentos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,28 @@
+﻿@{ Layout = "~/Views/Shared/_LayoutPortal.cshtml"; ViewBag.Title = "Consola Global MTP"; }
+<link rel="stylesheet" href="~/Content/Style.css">
+<div class="container py-4">
+    @*<div class="card p-3 mb-4 shadow-sm border-0" id="info-section">
+        <h5 class="fw-bold text-primary mb-2">Empresa / Contexto Operativo</h5>
+        <div id="info-content" class="text-muted small">Cargando información contextual...</div>
+    </div>*@
+
+    <div class="row g-4">
+        @*<div class="col-lg-4" id="col-usuarios">
+            <div class="card p-3 shadow-sm h-100 border-0">
+                <h5 class="fw-bold text-secondary mb-3 border-bottom pb-2">Usuarios Asignados</h5>
+                <div class="list-group list-group-flush" id="users-list">
+                </div>
+            </div>
+        </div>*@
+
+        <div class="col-lg-8" id="col-proyectos">
+            <div class="card p-3 shadow-sm h-100 border-0">
+                <h5 class="fw-bold text-secondary mb-3 border-bottom pb-2">Proyectos Activos</h5>
+                <div id="projects-accordion" class="accordion">
+                </div>
+            </div>
+        </div>
+
+        @Html.Partial("_ItemProyecto")
+    </div>
+</div>

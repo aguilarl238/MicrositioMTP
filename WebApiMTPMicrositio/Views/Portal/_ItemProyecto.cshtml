@@ -1,0 +1,30 @@
+﻿@model MTPMicrositio.Models.Web.ProyectoFiltroViewModel
+<div class="timeline">
+    @if (Model.Proyectos != null && Model.Proyectos.Any())
+    {
+        foreach (var p in Model.Proyectos)
+        {
+            <div class="timeline-item">
+                @*<div class="timeline-dot">01</div>*@
+                <div class="phase-card">
+                    <div class="phase-left">
+                        <span class="phase-badge">Fecha Inicio: @p.FechaInicio</span>
+                        <h3>@p.Nombre</h3>
+                    </div>
+                    <div class="phase-right">
+                        <p>Tipo: @p.Tipo <span class="highlight">Comentarios</span></p>
+                        @foreach(var c in p.ListaComentarios) {
+                        <p>@c.Descripcion <span class="highlight">Fecha comentario: @c.Fecha</span></p>
+                        }
+                    <div class="phase-deliverables">
+                        <a href="@Url.Action("Comentar", new { id = p.ProyectoId })" class="btn btn-sm btn-outline-secondary px-2"><i class="bi bi-pencil-square"></i>Ver Cometarios</a>
+                        @* <div class="deliverable-tag"><span>•</span> Matriz de Riesgos Inicial</div>
+        <div class="deliverable-tag"><span>•</span> Plan Maestro de Pruebas (MTP)</div>
+        <div class="deliverable-tag"><span>•</span> Definición de Alcance y KPIs</div>*@
+                    </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    </div>

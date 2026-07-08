@@ -1,0 +1,255 @@
+﻿@model MTPMicrositio.Models.Web.ProyectoComentariosViewModel
+@{ Layout = "~/Views/Shared/_LayoutPortal.cshtml"; ViewBag.Title = "Bitácora Tecnológica"; }
+<link rel="stylesheet" href="/Content/Style.css">
+<link rel="stylesheet" href="/Content/custom.css">
+<style>
+    :root {
+        --azul-noche: #1B2E4B;
+        --verde-esmeralda: #1B7A61;
+        --esmeralda-claro: #3ECBAD;
+        --blanco-frio: #F8F9FB;
+        --borde-suave: #DDE3EA;
+        --texto-secundario: #5A6E85;
+    }
+
+    .panel-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px 0;
+    }
+
+    /* Header del Contexto de Proyecto */
+    .project-header-box {
+        background: var(--azul-noche);
+        color: #fff;
+        padding: 24px;
+        border-radius: 8px;
+        margin-bottom: 24px;
+    }
+
+        .project-header-box h2 {
+            font-size: 20px;
+            font-weight: 500;
+            margin: 0 0 4px 0;
+        }
+
+            .project-header-box h2 em {
+                color: var(--esmeralda-claro);
+                font-style: normal;
+            }
+
+        .project-header-box p {
+            font-size: 12px;
+            color: #9AACBA;
+            margin: 0;
+        }
+
+    /* Caja de Publicación Profesional (Reemplaza el antiguo post-box) */
+    .interaction-input-card {
+        background: #fff;
+        padding: 24px;
+        border-radius: 8px;
+        border: 1px solid var(--borde-suave);
+        margin-bottom: 24px;
+        box-shadow: 0 2px 8px rgba(27,46,75,0.02);
+    }
+
+        .interaction-input-card h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--azul-noche);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            letter-spacing: 0.03em;
+        }
+
+    .form-select-mtp, .form-textarea-mtp {
+        width: 100%;
+        background: var(--blanco-frio);
+        border: 1px solid var(--borde-suave);
+        border-radius: 6px;
+        padding: 12px;
+        font-size: 13px;
+        color: var(--azul-noche);
+        font-family: inherit;
+        margin-bottom: 16px;
+        transition: all 0.2s;
+    }
+
+        .form-select-mtp:focus, .form-textarea-mtp:focus {
+            outline: none;
+            border-color: var(--verde-esmeralda);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(27,122,97,0.08);
+        }
+
+    .form-textarea-mtp {
+        resize: vertical;
+        min-height: 90px;
+    }
+
+    .btn-submit-comment {
+        background: var(--verde-esmeralda);
+        color: #fff;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+        width: 100%;
+        text-align: center;
+    }
+
+        .btn-submit-comment:hover {
+            background: #145b48;
+        }
+
+    /* Timeline de Comentarios */
+    .timeline-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--azul-noche);
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .comment-item {
+        background: #fff;
+        border: 1px solid var(--borde-suave);
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 14px;
+        position: relative;
+    }
+        /* Variante estética si el comentario fue emitido por un Ingeniero MTP */
+        .comment-item.mtp-staff {
+            border-left: 4px solid var(--verde-esmeralda);
+            background: #F4FAF8;
+        }
+
+    .comment-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        margin-bottom: 8px;
+        color: var(--texto-secundario);
+        border-bottom: 0.5px solid var(--borde-suave);
+        padding-bottom: 6px;
+    }
+
+    .comment-user {
+        font-weight: 600;
+        color: var(--azul-noche);
+    }
+
+    .comment-doc-badge {
+        background: #EAEFF5;
+        color: var(--azul-noche);
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-weight: 500;
+    }
+
+    .comment-text {
+        font-size: 13px;
+        color: var(--azul-noche);
+        line-height: 1.5;
+        white-space: pre-line;
+    }
+
+    .text-danger {
+        color: #D9534F;
+        font-size: 11px;
+        font-weight: 500;
+        display: block;
+        margin-top: -12px;
+        margin-bottom: 12px;
+    }
+</style>
+
+<div class="panel-container">
+
+    @if (TempData["Success"] != null)
+    {
+        <div style="background: #E8F7F3; color: var(--verde-esmeralda); padding: 12px; border-radius: 6px; margin-bottom: 16px; font-size: 13px; font-weight: 500;">
+            ✔ @TempData["Success"]
+        </div>
+    }
+    @if (TempData["Error"] != null || ViewBag.ErrorMessage != null)
+    {
+        <div style="background: #FCE8E6; color: #D9534F; padding: 12px; border-radius: 6px; margin-bottom: 16px; font-size: 13px; font-weight: 500;">
+            ⚠ @(TempData["Error"] ?? ViewBag.ErrorMessage)
+        </div>
+    }
+
+    <div class="project-header-box">
+        <p>Código de Control: @Model.CodigoProyecto</p>
+        <h2>Bitácora de Seguimiento: <em>@Model.ProyectoNombre</em></h2>
+        @*<p>Panel de interacción directa bajo la norma de calidad TMMi Nivel 5.</p>*@
+    </div>
+
+    <div class="interaction-input-card">
+        <h3>Registrar Observación / Requerimiento</h3>
+
+        @using (Html.BeginForm("AgregarComentario", "Portal", FormMethod.Post, new { id = "commentForm" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.ProyectoId)
+
+            @Html.DropDownListFor(m => m.PrioridadId, Model.ListaPrioridades, "--- Seleccionar Prioridad ---", new { @class = "form-select-mtp" })
+            @Html.ValidationMessageFor(m => m.PrioridadId, "", new { @class = "text-danger" })
+
+            @Html.TextAreaFor(m => m.NuevoComentarioTexto, new { @class = "form-textarea-mtp", placeholder = "Describa detalladamente su duda, aprobación o aclaración con respecto al entregable..." })
+            @Html.ValidationMessageFor(m => m.NuevoComentarioTexto, "", new { @class = "text-danger" })
+
+            <button type="submit" class="btn-submit-comment">Publicar en Línea de Tiempo del Proyecto</button>
+            <a href="@Url.Action("Index","Portal")" class="btn btn-sm btn-outline-secondary px-4">Volver</a>
+        }
+    </div>
+
+    <h3 class="timeline-title">💬 Historial de Interacciones Directas</h3>
+
+    <div class="comments-timeline">
+        @if (Model.HistorialComentarios == null || !Model.HistorialComentarios.Any())
+        {
+            <div style="background:#fff; border: 1px dashed var(--borde-suave); padding: 32px; text-align:center; color: var(--texto-secundario); border-radius:8px; font-size:13px;">
+                No se han registrado comentarios ni hilos de discusión para este proyecto aún.
+            </div>
+        }
+        else
+        {
+            foreach (var comentario in Model.HistorialComentarios)
+            {
+                // Asumiendo que posees un indicador "EsMTP" para cambiar el estilo si responde el consultor o el cliente
+                bool esMtpStaff = true;//comentario.EsMTP;
+
+                <div class="comment-item @(esMtpStaff ? "mtp-staff" : "")">
+                    <div class="comment-meta">
+                        <div>
+                            <span class="comment-user">@comentario.Activo</span>
+                            @if (esMtpStaff)
+                            {<span style="color: var(--verde-esmeralda); font-weight:600; font-size:11px;">(Equipo MTP)</span>}
+                        </div>
+                        <div>
+                            @comentario.Fecha
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 10px;">
+                        <span class="comment-doc-badge">📎 @comentario.PrioridadId</span>
+                    </div>
+
+                    <div class="comment-text">
+                        @comentario.Descripcion
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+</div>

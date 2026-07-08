@@ -1,0 +1,244 @@
+﻿@model MTPMicrositio.Models.Web.ProyectoViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+    ViewBag.Title = "Alta de Proyecto";
+}
+<link rel="stylesheet" href="/Content/Style.css">
+<link rel="stylesheet" href="/Content/custom.css">
+<style>
+    :root {
+        --azul-noche: #1B2E4B;
+        --verde-esmeralda: #1B7A61;
+        --blanco-frio: #F8F9FB;
+        --borde-suave: #DDE3EA;
+        --texto-secundario: #5A6E85;
+    }
+
+    .page-header-mtp {
+        margin-bottom: 24px;
+        border-bottom: 1px solid var(--borde-suave);
+        padding-bottom: 16px;
+    }
+
+    .page-title-mtp {
+        color: var(--azul-noche);
+        font-weight: 500;
+        font-size: 22px;
+        margin: 0;
+    }
+
+    .page-subtitle-mtp {
+        color: var(--texto-secundario);
+        font-size: 13px;
+        margin: 4px 0 0 0;
+    }
+
+    /* Tarjeta Contenedora Ejecutiva */
+    .form-card-mtp {
+        background: #ffffff;
+        border-radius: 8px;
+        border: 1px solid var(--borde-suave);
+        box-shadow: 0 4px 16px rgba(27, 46, 75, 0.03) !important;
+        padding: 32px !important;
+    }
+
+    /* Estilización de Campos e Inputs */
+    .field-group-mtp {
+        margin-bottom: 18px;
+    }
+
+    .label-mtp {
+        color: var(--azul-noche);
+        font-weight: 600;
+        font-size: 13px;
+        margin-bottom: 6px;
+        display: block;
+    }
+
+    .input-mtp, .select-mtp {
+        width: 100%;
+        background-color: var(--blanco-frio);
+        border: 1px solid var(--borde-suave);
+        border-radius: 6px;
+        padding: 10px 14px;
+        font-size: 13px;
+        color: var(--azul-noche);
+        transition: all 0.2s ease;
+    }
+
+        .input-mtp:focus, .select-mtp:focus {
+            outline: none;
+            border-color: var(--verde-esmeralda);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(27, 122, 97, 0.08);
+        }
+
+    /* Botonera de Control Operativo */
+    .btn-mtp-submit {
+        background-color: var(--verde-esmeralda);
+        color: #ffffff;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+        .btn-mtp-submit:hover {
+            background-color: #145b48;
+        }
+
+    .btn-mtp-cancel {
+        background-color: transparent;
+        color: var(--texto-secundario);
+        border: 1px solid var(--borde-suave);
+        padding: 10px 24px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+        .btn-mtp-cancel:hover {
+            background-color: var(--blanco-frio);
+            color: var(--azul-noche);
+            border-color: var(--azul-noche);
+            text-decoration: none;
+        }
+
+    /* Mensajes de Alerta y Validación */
+    .alert-mtp-danger {
+        background-color: #FCE8E6;
+        color: #D9534F;
+        border: 1px solid rgba(217, 83, 79, 0.1);
+        font-size: 13px;
+        padding: 12px 16px;
+        border-radius: 6px;
+    }
+
+    .text-danger-mtp {
+        color: #D9534F;
+        font-size: 11px;
+        font-weight: 500;
+        margin-top: 4px;
+        display: block;
+    }
+
+    /* Panel Control de Estatus */
+    .status-panel-mtp {
+        background: var(--blanco-frio);
+        padding: 14px;
+        border-radius: 6px;
+        border: 1px solid var(--borde-suave);
+    }
+
+    .checkbox-container-mtp {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+        .checkbox-container-mtp input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--verde-esmeralda);
+            cursor: pointer;
+        }
+
+    .checkbox-label-mtp {
+        color: var(--azul-noche);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        user-select: none;
+    }
+</style>
+
+<div class="container" style="max-width: 800px; margin-top: 1.5rem; margin-bottom: 3rem;">
+
+    <!-- Encabezado del Módulo -->
+    <div class="page-header-mtp">
+        <h2 class="page-title-mtp">Registrar Célula de Trabajo</h2>
+        <p class="page-subtitle-mtp">Asigne el portafolio comercial a un cliente y defina el líder técnico operativo responsable.</p>
+    </div>
+
+    @using (Html.BeginForm("Insertar", "Proyecto", FormMethod.Post, new { @class = "form-card-mtp" }))
+    {
+        @Html.AntiForgeryToken()
+
+        if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-mtp-danger mb-4">
+                @Html.ValidationSummary(true, "", new { @style = "list-style:none; padding:0; margin:0;" })
+            </div>
+        }
+
+        <div class="row g-3">
+            <!-- Campo: Cliente -->
+            <div class="col-md-6 field-group-mtp">
+                @Html.LabelFor(m => m.ClienteId, new { @class = "label-mtp" })
+                @Html.DropDownListFor(m => m.ClienteId, Model.ListaClientes, "--- Seleccionar Cliente ---", new { @class = "select-mtp form-select" })
+                @Html.ValidationMessageFor(m => m.ClienteId, "", new { @class = "text-danger-mtp" })
+            </div>
+
+            <!-- Campo: Usuario / Líder Técnico -->
+            <div class="col-md-6 field-group-mtp">
+                @Html.LabelFor(m => m.UsuarioId, new { @class = "label-mtp" })
+                @Html.DropDownListFor(m => m.UsuarioId, Model.ListaUsuarios, "--- Seleccionar Usuario/Líder ---", new { @class = "select-mtp form-select" })
+                @Html.ValidationMessageFor(m => m.UsuarioId, "", new { @class = "text-danger-mtp" })
+            </div>
+
+            <!-- Campo: Nombre de Proyecto -->
+            <div class="col-12 field-group-mtp">
+                @Html.LabelFor(m => m.Nombre, new { @class = "label-mtp" })
+                @Html.TextBoxFor(m => m.Nombre, new { @class = "input-mtp", placeholder = "Ej. Automatización Core Bancario TMMi 5" })
+                @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger-mtp" })
+            </div>
+
+            <!-- Campo: Estatus Inicial (Alimentado de la BD) -->
+            <div class="col-12 field-group-mtp">
+                @Html.LabelFor(m => m.EstatusId, new { @class = "label-mtp" })
+                @Html.DropDownListFor(m => m.EstatusId, Model.ListaEstatus, "--- Seleccionar Estatus ---", new { @class = "select-mtp form-select" })
+                @Html.ValidationMessageFor(m => m.EstatusId, "", new { @class = "text-danger-mtp" })
+            </div>
+
+            <!-- Campo: Tipo de Célula -->
+            <div class="col-md-6 field-group-mtp">
+                @Html.LabelFor(m => m.Tipo, new { @class = "label-mtp" })
+                @Html.TextBoxFor(m => m.Tipo, new { @class = "input-mtp", placeholder = "Ej. QA Automatizado / DevSecOps" })
+                @Html.ValidationMessageFor(m => m.Tipo, "", new { @class = "text-danger-mtp" })
+            </div>
+
+            <!-- Campo: Fecha de Inicio -->
+            <div class="col-md-6 field-group-mtp">
+                @Html.LabelFor(m => m.FechaInicio, new { @class = "label-mtp" })
+                @Html.TextBoxFor(m => m.FechaInicio, "{0:yyyy-MM-dd}", new { @class = "input-mtp", @type = "date" })
+                @Html.ValidationMessageFor(m => m.FechaInicio, "", new { @class = "text-danger-mtp" })
+            </div>
+
+            <!-- Panel de Gobernanza e Inclusión Inmediata -->
+            <div class="col-12 field-group-mtp my-3">
+                <div class="status-panel-mtp">
+                    <div class="checkbox-container-mtp">
+                        @Html.CheckBoxFor(m => m.Activo, new { id = "swActivo" })
+                        <label for="swActivo" class="checkbox-label-mtp">
+                            Habilitar visibilidad inmediata en el Portal del Cliente
+                        </label>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(m => m.Activo, "", new { @class = "text-danger-mtp", style = "margin-left: 6px;" })
+            </div>
+        </div>
+
+        <!-- Botonera de Envío y Retorno -->
+        <div class="d-flex justify-content-end align-items-center mt-4 pt-3 border-top" style="gap: 12px;">
+            <a href="@Url.Action("Index")" class="btn-mtp-cancel">Cancelar</a>
+            <button type="submit" class="btn-mtp-submit">
+                Guardar Registro
+            </button>
+        </div>
+    }
+</div>

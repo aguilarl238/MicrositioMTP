@@ -1,0 +1,155 @@
+﻿@model MTPMicrositio.Models.Web.DocumentoViewModel
+@{
+    ViewBag.Title = Model.DocumentoId == Guid.Empty ? "Alta de Documento Corporativo" : "Modificación de Documento";
+}
+@{ Layout = "~/Views/Shared/_LayoutPortal.cshtml"; }
+<style>
+    :root {
+        --azul-noche: #1B2E4B;
+        --verde-esmeralda: #1B7A61;
+        --blanco-frio: #F8F9FB;
+        --borde-suave: #DDE3EA;
+    }
+
+    .form-container {
+        background: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        border: 1px solid var(--borde-suave);
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .form-title {
+        color: var(--azul-noche);
+        font-size: 22px;
+        font-weight: 500;
+        margin-bottom: 24px;
+        border-bottom: 1px solid var(--borde-suave);
+        padding-bottom: 12px;
+    }
+
+    .group-field {
+        margin-bottom: 20px;
+    }
+
+    .label-mtp {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--azul-noche);
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .input-mtp {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid var(--borde-suave);
+        border-radius: 6px;
+        background: var(--blanco-frio);
+        font-size: 13px;
+    }
+
+        .input-mtp:focus {
+            outline: none;
+            border-color: var(--verde-esmeralda);
+            background: #fff;
+        }
+
+    .text-danger {
+        color: #D9534F;
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 4px;
+        display: block;
+    }
+
+    .btn-container {
+        display: flex;
+        gap: 16px;
+        margin-top: 32px;
+    }
+</style>
+
+<div class="form-container">
+    <h2 class="form-title">@ViewBag.Title <span style="font-size:13px; color: var(--verde-esmeralda); display:block;">Estándar de Calidad Operativa</span></h2>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div style="background: #FCE8E6; color: #D9534F; padding: 12px; border-radius: 6px; margin-bottom: 16px; font-size: 13px;">
+            ⚠ @ViewBag.ErrorMessage
+        </div>
+    }
+
+    @using (Html.BeginForm("Formulario", "Documentos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.DocumentoId)
+
+        <div class="group-field">
+            @Html.LabelFor(m => m.Nombre, new { @class = "label-mtp" })
+            @Html.TextBoxFor(m => m.Nombre, new { @class = "input-mtp", placeholder = "Ej. Plantilla de Plan de Pruebas Integrales" })
+            @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 group-field">
+                @Html.LabelFor(m => m.ClienteId, "Cliente", new { @class = "label-mtp" })
+                @Html.DropDownListFor(m => m.ClienteId, Model.Clientes, "--- Seleccione ---", new { @class = "input-mtp" })
+                @Html.ValidationMessageFor(m => m.ClienteId, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6 group-field">
+                @Html.LabelFor(m => m.ProyectoId, "Proyecto Técnico", new { @class = "label-mtp" })
+                @Html.DropDownListFor(m => m.ProyectoId, Model.Proyectos, "--- Seleccione ---", new { @class = "input-mtp" })
+                @Html.ValidationMessageFor(m => m.ProyectoId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 group-field">
+                @Html.LabelFor(m => m.TipoDocumentoId, "Tipo de Documento", new { @class = "label-mtp" })
+                @Html.DropDownListFor(m => m.TipoDocumentoId, Model.TiposDocumento, "--- Seleccione ---", new { @class = "input-mtp" })
+                @Html.ValidationMessageFor(m => m.TipoDocumentoId, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6 group-field">
+                @Html.LabelFor(m => m.EstatusId, "Estatus de Liberación", new { @class = "label-mtp" })
+                @Html.DropDownListFor(m => m.EstatusId, Model.Estatus, "--- Seleccione ---", new { @class = "input-mtp" })
+                @Html.ValidationMessageFor(m => m.EstatusId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 group-field">
+                @Html.LabelFor(m => m.FechaVigencia, "Fecha de Vigencia", new { @class = "label-mtp" })
+                @Html.TextBoxFor(m => m.FechaVigencia, "{0:yyyy-MM-dd}", new { @class = "input-mtp", type = "date" })
+                @Html.ValidationMessageFor(m => m.FechaVigencia, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6 group-field" style="padding-top: 30px;">
+                <label style="font-size: 13px; font-weight: 500; color: var(--azul-noche); cursor:pointer;">
+                    @Html.CheckBoxFor(m => m.Activo) Activo / Vigente en Línea Base
+                </label>
+            </div>
+        </div>
+
+        @* 2. ADICIÓN DEL CAMPO UPLOAD FILE CON ESTILO SOBRIO MTP *@
+        <div class="row">
+            <div class="col-md-6 group-field" style="margin-top: 20px;">
+                @Html.LabelFor(m => m.ArchivoCargado, new { @class = "label-mtp" })
+                @Html.TextBoxFor(m => m.ArchivoCargado, new { @class = "input-mtp", type = "file", accept = ".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg" })
+                <small style="color: var(--texto-secundario); font-size: 11px; display:block; margin-top:4px;">
+                    Formatos admitidos: PDF, Word, Excel e Imágenes. Máximo 10MB.
+                </small>
+                @Html.ValidationMessageFor(m => m.ArchivoCargado, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6 group-field">
+                @Html.LabelFor(m => m.UrlDoc, "URL", new { @class = "label-mtp" })
+                @Html.TextBoxFor(m => m.UrlDoc, new { @class = "input-mtp"})
+            </div>
+        </div>
+        <div class="btn-container">
+            <button type="submit" class="btn" style="background: var(--verde-esmeralda); color:#fff; padding: 12px 24px;">Confirmar y Guardar Registro</button>
+            <a href="@Url.Action("Index")" class="btn" style="background: #5A6E85; color:#fff; padding: 12px 24px; text-decoration:none;">Regresar</a>
+        </div>
+            }
+        </div>

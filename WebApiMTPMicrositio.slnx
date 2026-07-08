@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="MTPMicrositio.BLL/MTPMicrositio.BLL.csproj" Id="35a01542-680f-4dfe-ace2-4b30433f45ed" />
+  <Project Path="MTPMicrositio.DAL/MTPMicrositio.DAL.csproj" Id="1720f9d9-5ad0-42d9-a414-28e5eb8a6fbf" />
+  <Project Path="MTPMicrositio.Entities/MTPMicrositio.Entities.csproj" Id="73fc80a0-707b-4d6e-9ae6-8589586f656c" />
+  <Project Path="WebApiMTPMicrositio.Tests/WebApiMTPMicrositio.Tests.csproj" Id="2213ebf8-2e3f-4f8b-92a8-06a03ca40b68" />
+  <Project Path="WebApiMTPMicrositio/WebApiMTPMicrositio.csproj" Id="d408dc52-597d-4444-9b29-e9c7ef93438a" />
+</Solution>

@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MTP_MicrositioDBModelStoreContainer" CdmEntityContainer="MTP_MicrositioDBEntities">
+    <EntitySetMapping Name="AuditoriaCambios">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.AuditoriaCambios">
+        <MappingFragment StoreEntitySet="AuditoriaCambios">
+          <ScalarProperty Name="AuditoriaId" ColumnName="AuditoriaId" />
+          <ScalarProperty Name="Tabla" ColumnName="Tabla" />
+          <ScalarProperty Name="RegistroId" ColumnName="RegistroId" />
+          <ScalarProperty Name="Accion" ColumnName="Accion" />
+          <ScalarProperty Name="DatosAntes" ColumnName="DatosAntes" />
+          <ScalarProperty Name="DatosDespues" ColumnName="DatosDespues" />
+          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clientes">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.Clientes">
+        <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+          <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ComentariosProyecto">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.ComentariosProyecto">
+        <MappingFragment StoreEntitySet="ComentariosProyecto">
+          <ScalarProperty Name="ComentarioId" ColumnName="ComentarioId" />
+          <ScalarProperty Name="ProyectoId" ColumnName="ProyectoId" />
+          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="PrioridadId" ColumnName="PrioridadId" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Componentes">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.Componentes">
+        <MappingFragment StoreEntitySet="Componentes">
+          <ScalarProperty Name="ComponenteId" ColumnName="ComponenteId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Documentos">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.Documentos">
+        <MappingFragment StoreEntitySet="Documentos">
+          <ScalarProperty Name="DocumentoId" ColumnName="DocumentoId" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="TipoDocumentoId" ColumnName="TipoDocumentoId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estatus">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.Estatus">
+        <MappingFragment StoreEntitySet="Estatus">
+          <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Seccion" ColumnName="Seccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menu">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Ruta" ColumnName="Ruta" />
+          <ScalarProperty Name="Icono" ColumnName="Icono" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="MenuPadreId" ColumnName="MenuPadreId" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PermisoRolComponente">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.PermisoRolComponente">
+        <MappingFragment StoreEntitySet="PermisoRolComponente">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RolId" ColumnName="RolId" />
+          <ScalarProperty Name="ComponenteId" ColumnName="ComponenteId" />
+          <ScalarProperty Name="PuedeVer" ColumnName="PuedeVer" />
+          <ScalarProperty Name="PuedeEditar" ColumnName="PuedeEditar" />
+          <ScalarProperty Name="PuedeEliminar" ColumnName="PuedeEliminar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PermisoRolMenu">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.PermisoRolMenu">
+        <MappingFragment StoreEntitySet="PermisoRolMenu">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RolId" ColumnName="RolId" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="PuedeVer" ColumnName="PuedeVer" />
+          <ScalarProperty Name="PuedeEditar" ColumnName="PuedeEditar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrioridadComentario">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.PrioridadComentario">
+        <MappingFragment StoreEntitySet="PrioridadComentario">
+          <ScalarProperty Name="PrioridadId" ColumnName="PrioridadId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Proyectos">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.Proyectos">
+        <MappingFragment StoreEntitySet="Proyectos">
+          <ScalarProperty Name="ProyectoId" ColumnName="ProyectoId" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.Roles">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RolId" ColumnName="RolId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoDocumento">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.TipoDocumento">
+        <MappingFragment StoreEntitySet="TipoDocumento">
+          <ScalarProperty Name="TipoDocumentoId" ColumnName="TipoDocumentoId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsuarioRol">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.UsuarioRol">
+        <MappingFragment StoreEntitySet="UsuarioRol">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+          <ScalarProperty Name="RolId" ColumnName="RolId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VersionesDocumento">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.VersionesDocumento">
+        <MappingFragment StoreEntitySet="VersionesDocumento">
+          <ScalarProperty Name="VersionId" ColumnName="VersionId" />
+          <ScalarProperty Name="DocumentoId" ColumnName="DocumentoId" />
+          <ScalarProperty Name="VersionNumero" ColumnName="VersionNumero" />
+          <ScalarProperty Name="UrlArchivo" ColumnName="UrlArchivo" />
+          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_ComponentesPorUsuario">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.vw_ComponentesPorUsuario">
+        <MappingFragment StoreEntitySet="vw_ComponentesPorUsuario">
+          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="PuedeVer" ColumnName="PuedeVer" />
+          <ScalarProperty Name="PuedeEditar" ColumnName="PuedeEditar" />
+          <ScalarProperty Name="PuedeEliminar" ColumnName="PuedeEliminar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_MenuPorUsuario">
+      <EntityTypeMapping TypeName="MTP_MicrositioDBModel.vw_MenuPorUsuario">
+        <MappingFragment StoreEntitySet="vw_MenuPorUsuario">
+          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Ruta" ColumnName="Ruta" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_Cliente_Delete" FunctionName="MTP_MicrositioDBModel.Store.sp_Cliente_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_Cliente_Insert" FunctionName="MTP_MicrositioDBModel.Store.sp_Cliente_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_Cliente_Select" FunctionName="MTP_MicrositioDBModel.Store.sp_Cliente_Select">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MTP_MicrositioDBModel.sp_Cliente_Select_Result">
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+          <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Cliente_Update" FunctionName="MTP_MicrositioDBModel.Store.sp_Cliente_Update" />
+    <FunctionImportMapping FunctionImportName="sp_Comentario_Delete" FunctionName="MTP_MicrositioDBModel.Store.sp_Comentario_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_Comentario_Insert" FunctionName="MTP_MicrositioDBModel.Store.sp_Comentario_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_Comentario_Select" FunctionName="MTP_MicrositioDBModel.Store.sp_Comentario_Select">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MTP_MicrositioDBModel.sp_Comentario_Select_Result">
+          <ScalarProperty Name="ComentarioId" ColumnName="ComentarioId" />
+          <ScalarProperty Name="ProyectoId" ColumnName="ProyectoId" />
+          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="PrioridadId" ColumnName="PrioridadId" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Componente_Delete" FunctionName="MTP_MicrositioDBModel.Store.sp_Componente_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_Componente_Insert" FunctionName="MTP_MicrositioDBModel.Store.sp_Componente_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_Componente_Select" FunctionName="MTP_MicrositioDBModel.Store.sp_Componente_Select">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MTP_MicrositioDBModel.sp_Componente_Select_Result">
+          <ScalarProperty Name="ComponenteId" ColumnName="ComponenteId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Componente_Update" FunctionName="MTP_MicrositioDBModel.Store.sp_Componente_Update" />
+    <FunctionImportMapping FunctionImportName="sp_Documento_Delete" FunctionName="MTP_MicrositioDBModel.Store.sp_Documento_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_Documento_Insert" FunctionName="MTP_MicrositioDBModel.Store.sp_Documento_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_Documento_Select" FunctionName="MTP_MicrositioDBModel.Store.sp_Documento_Select">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MTP_MicrositioDBModel.sp_Documento_Select_Result">
+          <ScalarProperty Name="DocumentoId" ColumnName="DocumentoId" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="TipoDocumentoId" ColumnName="TipoDocumentoId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Menu_Delete" FunctionName="MTP_MicrositioDBModel.Store.sp_Menu_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_Menu_Insert" FunctionName="MTP_MicrositioDBModel.Store.sp_Menu_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_Menu_Select" FunctionName="MTP_MicrositioDBModel.Store.sp_Menu_Select">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MTP_MicrositioDBModel.sp_Menu_Select_Result">
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Ruta" ColumnName="Ruta" />
+          <ScalarProperty Name="Icono" ColumnName="Icono" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="MenuPadreId" ColumnName="MenuPadreId" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Menu_Update" FunctionName="MTP_MicrositioDBModel.Store.sp_Menu_Update" />
+    <FunctionImportMapping FunctionImportName="sp_PermisoRolComponente_Delete" FunctionName="MTP_MicrositioDBModel.Store.sp_PermisoRolComponente_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_PermisoRolComponente_Insert" FunctionName="MTP_MicrositioDBModel.Store.sp_PermisoRolComponente_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_PermisoRolComponente_Select" FunctionName="MTP_MicrositioDBModel.Store.sp_PermisoRolComponente_Select">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MTP_MicrositioDBModel.sp_PermisoRolComponente_Select_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RolId" ColumnName="RolId" />
+          <ScalarProperty Name="ComponenteId" ColumnName="ComponenteId" />
+          <ScalarProperty Name="PuedeVer" ColumnName="PuedeVer" />
+          <ScalarProperty Name="PuedeEditar" ColumnName="PuedeEditar" />
+          <ScalarProperty Name="PuedeEliminar" ColumnName="PuedeEliminar" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Componente" ColumnName="Componente" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_PermisoRolComponente_Update" FunctionName="MTP_MicrositioDBModel.Store.sp_PermisoRolComponente_Update" />
+    <FunctionImportMapping FunctionImportName="sp_PermisoRolMenu_Delete" FunctionName="MTP_MicrositioDBModel.Store.sp_PermisoRolMenu_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_PermisoRolMenu_Insert" FunctionName="MTP_MicrositioDBModel.Store.sp_PermisoRolMenu_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_PermisoRolMenu_Select" FunctionName="MTP_MicrositioDBModel.Store.sp_PermisoRolMenu_Select">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MTP_MicrositioDBModel.sp_PermisoRolMenu_Select_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RolId" ColumnName="RolId" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="PuedeVer" ColumnName="PuedeVer" />
+          <ScalarProperty Name="PuedeEditar" ColumnName="PuedeEditar" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Menu" ColumnName="Menu" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_PermisoRolMenu_Update" FunctionName="MTP_MicrositioDBModel.Store.sp_PermisoRolMenu_Update" />
+    <FunctionImportMapping FunctionImportName="sp_Proyecto_Delete" FunctionName="MTP_MicrositioDBModel.Store.sp_Proyecto_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_Proyecto_Insert" FunctionName="MTP_MicrositioDBModel.Store.sp_Proyecto_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_Proyecto_Select" FunctionName="MTP_MicrositioDBModel.Store.sp_Proyecto_Select">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MTP_MicrositioDBModel.sp_Proyecto_Select_Result">
+          <ScalarProperty Name="ProyectoId" ColumnName="ProyectoId" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="EstatusId" ColumnName="EstatusId" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Proyecto_Update" FunctionName="MTP_MicrositioDBModel.Store.sp_Proyecto_Update" />
+  </EntityContainerMapping>
+</Mapping>
