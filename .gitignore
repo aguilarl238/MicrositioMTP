@@ -4,3 +4,5 @@
 
 /.vs
 /WebApiMTPMicrositio/.vs
+/WebApiMTPMicrositio/bin
+/WebApiMTPMicrositio/obj
